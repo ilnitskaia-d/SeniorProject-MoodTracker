@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/entryList">
+    <fragment
+        android:id="@+id/entryList"
+        android:name="com.example.senproject.EntryList"
+        android:label="entry_list"
+        tools:layout="@layout/entry_list" >
+        <action
+            android:id="@+id/action_entryList_to_createEntry"
+            app:destination="@id/createEntry" />
+    </fragment>
+    <fragment
+        android:id="@+id/createEntry"
+        android:name="com.example.senproject.CreateEntry"
+        android:label="create_entry"
+        tools:layout="@layout/create_entry" >
+        <action
+            android:id="@+id/action_createEntry_to_entryList"
+            app:destination="@id/entryList" />
+    </fragment>
+</navigation>
