@@ -1,6 +1,6 @@
-package com.example.senproject
+package com.example.senproject.database
 
-data class Entry(
+data class MoodEntry(
     val moodState: MoodState,
     val time: String, //toDo: change to the DateTime type
     val emotions: List<String>?,

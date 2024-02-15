@@ -6,7 +6,7 @@
     app:startDestination="@id/entryList">
     <fragment
         android:id="@+id/entryList"
-        android:name="com.example.senproject.EntryList"
+        android:name="com.example.senproject.ui.EntryList"
         android:label="entry_list"
         tools:layout="@layout/entry_list" >
         <action
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/createEntry"
-        android:name="com.example.senproject.CreateEntry"
+        android:name="com.example.senproject.ui.CreateEntry"
         android:label="create_entry"
         tools:layout="@layout/create_entry" >
         <action

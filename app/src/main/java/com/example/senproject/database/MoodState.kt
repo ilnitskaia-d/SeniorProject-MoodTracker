@@ -1,4 +1,4 @@
-package com.example.senproject
+package com.example.senproject.database
 
 enum class MoodState {
     V_GOOD,
