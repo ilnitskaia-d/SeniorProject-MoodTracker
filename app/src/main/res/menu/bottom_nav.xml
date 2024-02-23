@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/entryList"
+        android:icon="@drawable/ic_settings"
+        android:title="" />
+    <item
+        android:id="@+id/createEntry"
+        android:icon="@drawable/ic_add_entry"
+        android:title="" />
+    <item
+        android:id="@+id/btn_menu_entry"
+        android:icon="@drawable/ic_notebook"
+        android:title=""
+        />
+</menu>
