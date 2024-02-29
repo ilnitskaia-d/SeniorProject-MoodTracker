@@ -9,15 +9,14 @@
 
     <ImageView
         android:id="@+id/iv_mood"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_time"
-        android:src="@drawable/ic_face"
-        android:scaleX="2"
-        android:scaleY="2"
-        android:layout_margin="10dp"
+        android:src="@drawable/emotion_good"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="5dp"
         />
 
     <TextView
