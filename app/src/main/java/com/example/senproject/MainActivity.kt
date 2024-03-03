@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.topToolbar.inflateMenu(R.menu.top_toolbar)
+
         navController = Navigation.findNavController(this, R.id.container)
         setupWithNavController(binding.botNav, navController)
 
