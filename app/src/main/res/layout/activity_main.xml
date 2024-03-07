@@ -6,24 +6,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/top_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#673AB7"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/container"
-        />
-
     <fragment
         android:id="@+id/container"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintTop_toBottomOf="@id/top_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bot_nav"
         app:layout_constraintEnd_toEndOf="parent"

@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf=""
+            app:layout_constraintBottom_toTopOf="@id/rv_activities_table"
             android:padding="10dp"
             android:layout_margin="20dp"
             >
