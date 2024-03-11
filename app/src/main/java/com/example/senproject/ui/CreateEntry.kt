@@ -43,7 +43,6 @@ class CreateEntry : Fragment() {
         initMoodChoiceTable()
 
         binding.rvActivitiesTable.adapter = activitiesCheckAdapter
-        //ToDo: Implement checking in/out boxes
 
         //ToDo: Implement the button for adding and deleting the activities
 
