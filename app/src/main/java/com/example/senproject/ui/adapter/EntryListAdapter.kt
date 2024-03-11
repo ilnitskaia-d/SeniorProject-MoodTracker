@@ -13,7 +13,7 @@ import com.example.senproject.databinding.EntryListBinding
 class EntryListAdapter (private val list: List<MoodEntry>):
     RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
 {
-    class ViewHolder(val entryItemBinding: EntryItemBinding):
+    class ViewHolder(private val entryItemBinding: EntryItemBinding):
         RecyclerView.ViewHolder(entryItemBinding.root) {
         fun bindItem(moodEntry: MoodEntry) {
             if(moodEntry.moodState == MoodState.GOOD) {

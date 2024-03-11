@@ -11,10 +11,13 @@ import com.example.senproject.database.ActivitiesCheck
 import com.example.senproject.database.MoodEntry
 import com.example.senproject.database.MoodState
 import com.example.senproject.databinding.CreateEntryBinding
+import com.example.senproject.ui.adapter.ActivitiesEntryAdapter
 
 class CreateEntry : Fragment() {
 
     private lateinit var binding: CreateEntryBinding
+    private lateinit var activitiesCheckAdapter: ActivitiesEntryAdapter
+
     private var activities_list: List<ActivitiesCheck> = listOf(
         ActivitiesCheck(name = "Eat"),
         ActivitiesCheck(name = "Sleep"),
@@ -29,6 +32,8 @@ class CreateEntry : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        activitiesCheckAdapter = ActivitiesEntryAdapter(activities_list)
+
         binding = CreateEntryBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -37,11 +42,12 @@ class CreateEntry : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initMoodChoiceTable()
 
-        //ToDo: implement the button for adding and deleting the activities
+        binding.rvActivitiesTable.adapter = activitiesCheckAdapter
+        //ToDo: Implement checking in/out boxes
 
-        //ToDo: create an adapter for the activity RV
+        //ToDo: Implement the button for adding and deleting the activities
 
-        //ToDo implement the button for save the entry
+        //ToDo: Implement the button for save the entry
     }
 
     private fun initMoodChoiceTable() {
