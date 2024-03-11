@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.senproject.R
 import com.example.senproject.database.ActivitiesCheck
 import com.example.senproject.database.MoodEntry
@@ -41,7 +42,7 @@ class CreateEntry : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initMoodChoiceTable()
-
+        initButtons()
         binding.rvActivitiesTable.adapter = activitiesCheckAdapter
 
         //ToDo: Implement the button for adding and deleting the activities
@@ -68,6 +69,12 @@ class CreateEntry : Fragment() {
                 view.setBackgroundColor(selectedColor)
                 selectedMood = MoodState.values()[index]
             }
+        }
+    }
+
+    private fun initButtons() {
+        binding.btnBack.setOnClickListener {
+            findNavController().navigate(R.id.action_createEntry_to_entryList)
         }
     }
 }
