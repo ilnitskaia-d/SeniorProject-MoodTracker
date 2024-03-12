@@ -1,14 +1,12 @@
-package com.example.senproject.ui.adapter
+package com.example.senproject.ui.adapters
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.senproject.R
-import com.example.senproject.database.MoodEntry
-import com.example.senproject.database.MoodState
+import com.example.senproject.data.models.MoodEntry
+import com.example.senproject.data.MoodState
 import com.example.senproject.databinding.EntryItemBinding
-import com.example.senproject.databinding.EntryListBinding
 
 class EntryListAdapter (private val list: List<MoodEntry>):
     RecyclerView.Adapter<EntryListAdapter.ViewHolder>()

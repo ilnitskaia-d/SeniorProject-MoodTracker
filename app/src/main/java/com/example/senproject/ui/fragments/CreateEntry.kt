@@ -1,18 +1,16 @@
-package com.example.senproject.ui
+package com.example.senproject.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.senproject.R
-import com.example.senproject.database.ActivitiesCheck
-import com.example.senproject.database.MoodEntry
-import com.example.senproject.database.MoodState
+import com.example.senproject.data.models.ActivitiesCheck
+import com.example.senproject.data.MoodState
 import com.example.senproject.databinding.CreateEntryBinding
-import com.example.senproject.ui.adapter.ActivitiesEntryAdapter
+import com.example.senproject.ui.adapters.ActivitiesEntryAdapter
 
 class CreateEntry : Fragment() {
 
@@ -47,9 +45,10 @@ class CreateEntry : Fragment() {
 
         binding.rvActivitiesTable.adapter = activitiesCheckAdapter
 
-        //ToDo: Implement the button for adding and deleting the activities
+        //ToDo: Implement the button for adding and deleting the activities (mb do in the settings fragment?)
 
         //ToDo: Implement the button for save the entry
+
     }
 
     private fun initMoodChoiceTable() {

@@ -1,4 +1,4 @@
-package com.example.senproject.database
+package com.example.senproject.data.models
 
 data class ActivitiesCheck(
     var checked: Boolean? = false,

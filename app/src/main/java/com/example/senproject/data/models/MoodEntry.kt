@@ -1,4 +1,6 @@
-package com.example.senproject.database
+package com.example.senproject.data.models
+
+import com.example.senproject.data.MoodState
 
 data class MoodEntry(
     val moodState: MoodState,

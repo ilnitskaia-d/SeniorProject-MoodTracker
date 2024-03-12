@@ -1,10 +1,9 @@
-package com.example.senproject.ui.adapter
+package com.example.senproject.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.senproject.database.ActivitiesCheck
+import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.databinding.ActivitiesItemBinding
 
 class ActivitiesEntryAdapter (private val list: List<ActivitiesCheck>):

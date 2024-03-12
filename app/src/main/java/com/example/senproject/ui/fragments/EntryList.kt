@@ -1,14 +1,14 @@
-package com.example.senproject.ui
+package com.example.senproject.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.senproject.database.MoodEntry
-import com.example.senproject.database.MoodState
+import com.example.senproject.data.models.MoodEntry
+import com.example.senproject.data.MoodState
 import com.example.senproject.databinding.EntryListBinding
-import com.example.senproject.ui.adapter.EntryListAdapter
+import com.example.senproject.ui.adapters.EntryListAdapter
 
 class EntryList : Fragment() {
     private val list = listOf<MoodEntry>(
