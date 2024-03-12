@@ -42,7 +42,9 @@ class CreateEntry : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initMoodChoiceTable()
+
         initButtons()
+
         binding.rvActivitiesTable.adapter = activitiesCheckAdapter
 
         //ToDo: Implement the button for adding and deleting the activities
