@@ -63,6 +63,7 @@ dependencies {
 
     //noinspection KaptUsageInsteadOfKsp
     kapt("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     val lifecycle_version = "2.7.0"
     //ViewModel

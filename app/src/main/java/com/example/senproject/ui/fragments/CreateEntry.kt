@@ -4,13 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.senproject.R
 import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.data.MoodState
+import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.CreateEntryBinding
 import com.example.senproject.ui.adapters.ActivitiesEntryAdapter
+import com.example.senproject.ui.viewmodels.CreateEntryViewModel
+import java.time.LocalDateTime
 
 class CreateEntry : Fragment() {
 
@@ -25,30 +30,53 @@ class CreateEntry : Fragment() {
         ActivitiesCheck(name = "Workout"),
     )
 
-    private lateinit var selectedMood: MoodState
+    private var selectedMood: MoodState? = null
+
+    private lateinit var createEntryViewModel: CreateEntryViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        createEntryViewModel = ViewModelProvider(this)[CreateEntryViewModel::class.java]
         activitiesCheckAdapter = ActivitiesEntryAdapter(activities_list)
-
         binding = CreateEntryBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+
         initMoodChoiceTable()
 
         initButtons()
 
         binding.rvActivitiesTable.adapter = activitiesCheckAdapter
 
+
+        binding.btnSave.setOnClickListener {
+            addMoodEntryToDB()
+        }
+
         //ToDo: Implement the button for adding and deleting the activities (mb do in the settings fragment?)
+    }
 
-        //ToDo: Implement the button for save the entry
+    private fun addMoodEntryToDB() {
+        if(selectedMood != null ){
+            val entry = MoodEntry(
+                id = 0,
+                moodState = selectedMood!!,
+                time = LocalDateTime.now().toString(),
+                activities = getCheckedActivities(),
+                text = binding.txtInput.toString()
+            )
 
+            createEntryViewModel.addMoodEntry(entry)
+            Toast.makeText(context, "Entry is saved", Toast.LENGTH_LONG).show()
+
+            findNavController().navigate(R.id.action_createEntry_to_entryList)
+        } else {
+            Toast.makeText(context, "Please select your current mood", Toast.LENGTH_LONG).show()
+        }
     }
 
     private fun initMoodChoiceTable() {
@@ -71,6 +99,12 @@ class CreateEntry : Fragment() {
                 selectedMood = MoodState.values()[index]
             }
         }
+    }
+
+    private fun getCheckedActivities(): List<String> {
+        return activities_list
+            .filter { activitiesCheck -> activitiesCheck.checked }
+            .map { activitiesCheck -> activitiesCheck.name }
     }
 
     private fun initButtons() {

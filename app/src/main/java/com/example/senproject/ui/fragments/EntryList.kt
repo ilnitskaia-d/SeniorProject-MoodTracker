@@ -11,11 +11,11 @@ import com.example.senproject.databinding.EntryListBinding
 import com.example.senproject.ui.adapters.EntryListAdapter
 
 class EntryList : Fragment() {
-    private val list = listOf<MoodEntry>(
-        MoodEntry(moodState = MoodState.GOOD, time = "1:00"),
-        MoodEntry(moodState = MoodState.GOOD, time = "2:00"),
-        MoodEntry(moodState = MoodState.OK, time = "3:00"),
-        MoodEntry(moodState = MoodState.BAD, time = "4:00")
+    private val list = listOf(
+        MoodEntry(id = 0, moodState = MoodState.GOOD, time = "1:00", activities = listOf("")),
+        MoodEntry(id = 0, moodState = MoodState.GOOD, time = "2:00", activities = listOf("")),
+        MoodEntry(id = 0, moodState = MoodState.OK, time = "3:00", activities = listOf("")),
+        MoodEntry(id = 0, moodState = MoodState.BAD, time = "4:00", activities = listOf(""))
     )
 
     private var binding: EntryListBinding? = null
