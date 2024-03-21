@@ -8,9 +8,10 @@ import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.data.MoodState
 import com.example.senproject.databinding.EntryItemBinding
 
-class EntryListAdapter (private val list: List<MoodEntry>):
-    RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
+class EntryListAdapter: RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
 {
+    var list: List<MoodEntry> = emptyList<MoodEntry>()
+
     class ViewHolder(private val entryItemBinding: EntryItemBinding):
         RecyclerView.ViewHolder(entryItemBinding.root) {
         fun bindItem(moodEntry: MoodEntry) {
@@ -37,5 +38,10 @@ class EntryListAdapter (private val list: List<MoodEntry>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val entry = list[position]
         holder.bindItem(entry)
+    }
+
+    fun setData(entryList: List<MoodEntry>) {
+        this.list = entryList
+        notifyDataSetChanged()
     }
 }
