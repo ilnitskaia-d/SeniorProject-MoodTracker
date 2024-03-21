@@ -12,9 +12,10 @@ class ActivitiesEntryAdapter (private val list: List<ActivitiesCheck>):
     class ViewHolder(private val activitiesItemBinding: ActivitiesItemBinding):
         RecyclerView.ViewHolder(activitiesItemBinding.root){
         fun bindItem(activitiesCheck: ActivitiesCheck) {
-            activitiesItemBinding.cbActivities.isActivated = activitiesCheck.checked!!
+            activitiesItemBinding.cbActivities.isActivated = activitiesCheck.checked
             activitiesItemBinding.cbActivities.setOnClickListener {
                 itemView.isActivated = !itemView.isActivated
+                activitiesCheck.checked = !activitiesCheck.checked
             }
             activitiesItemBinding.tvActivities.text = activitiesCheck.name
         }

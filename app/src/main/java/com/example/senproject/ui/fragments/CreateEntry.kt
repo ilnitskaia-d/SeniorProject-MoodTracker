@@ -1,6 +1,7 @@
 package com.example.senproject.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -80,13 +81,13 @@ class CreateEntry : Fragment() {
     }
 
     private fun initMoodChoiceTable() {
-        val btn_bad = binding.ivBad
-        val btn_notgood = binding.ivNotgood
-        val btn_ok = binding.ivOk
-        val btn_good = binding.ivGood
         val btn_great = binding.ivGreat
+        val btn_good = binding.ivGood
+        val btn_ok = binding.ivOk
+        val btn_notgood = binding.ivNotgood
+        val btn_bad = binding.ivBad
 
-        val btnCollection = listOf(btn_bad, btn_notgood, btn_ok, btn_good, btn_great)
+        val btnCollection = listOf(btn_great, btn_good, btn_ok, btn_notgood, btn_bad)
 
         val selectedColor = resources.getColor(R.color.btn_selected)
         val unselectedColor = resources.getColor(R.color.btn_unselected)
@@ -97,14 +98,17 @@ class CreateEntry : Fragment() {
 
                 view.setBackgroundColor(selectedColor)
                 selectedMood = MoodState.values()[index]
+                Log.i("MOOD", "the mood is" + selectedMood.toString())
             }
         }
     }
 
     private fun getCheckedActivities(): List<String> {
-        return activities_list
+        val list = activities_list
             .filter { activitiesCheck -> activitiesCheck.checked }
             .map { activitiesCheck -> activitiesCheck.name }
+        Log.i("ListCheck", list.toString())
+        return list
     }
 
     private fun initButtons() {

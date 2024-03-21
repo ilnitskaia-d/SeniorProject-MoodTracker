@@ -1,5 +1,6 @@
 package com.example.senproject.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,16 +15,28 @@ class EntryListAdapter: RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
 
     class ViewHolder(private val entryItemBinding: EntryItemBinding):
         RecyclerView.ViewHolder(entryItemBinding.root) {
+
         fun bindItem(moodEntry: MoodEntry) {
-            if(moodEntry.moodState == MoodState.GOOD) {
-                entryItemBinding.ivMood.setImageResource(R.drawable.ic_face)
-            } else {
-                entryItemBinding.ivMood.setImageResource(R.drawable.ic_face2)
+            entryItemBinding.apply {
+                moodEntry.apply {
+                    when (moodState) {
+                        MoodState.V_GOOD -> ivMood.setImageResource(R.drawable.emotion_great)
+                        MoodState.GOOD -> ivMood.setImageResource(R.drawable.emotion_good)
+                        MoodState.OK -> ivMood.setImageResource(R.drawable.emotion_ok)
+                        MoodState.BAD -> ivMood.setImageResource(R.drawable.emotion_notgood)
+                        MoodState.V_BAD -> ivMood.setImageResource(R.drawable.emotion_bad)
+                    }
+                }
+
+                tvTime.text = moodEntry.time
+
+                Log.i("Activities", moodEntry.activities.toString())
+
+                val adapter = EntryListActivitiesAdapter(moodEntry.activities)
+                rvActivities.adapter = adapter
+
+                //toDo fun for setting the activities and emotions
             }
-
-            entryItemBinding.tvTime.text = moodEntry.time
-            //toDo fun for setting the activities and emotions
-
         }
     }
 
@@ -36,8 +49,7 @@ class EntryListAdapter: RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val entry = list[position]
-        holder.bindItem(entry)
+        holder.bindItem(list[position])
     }
 
     fun setData(entryList: List<MoodEntry>) {

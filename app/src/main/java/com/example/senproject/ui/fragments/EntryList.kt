@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.senproject.data.models.MoodEntry
-import com.example.senproject.data.MoodState
 import com.example.senproject.databinding.EntryListBinding
 import com.example.senproject.ui.adapters.EntryListAdapter
 import com.example.senproject.ui.viewmodels.EntryListViewModel
