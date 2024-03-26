@@ -16,7 +16,9 @@ import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.CreateEntryBinding
 import com.example.senproject.ui.adapters.ActivitiesEntryAdapter
 import com.example.senproject.ui.viewmodels.CreateEntryViewModel
-import java.time.LocalDateTime
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 class CreateEntry : Fragment() {
 
@@ -66,7 +68,8 @@ class CreateEntry : Fragment() {
             val entry = MoodEntry(
                 id = 0,
                 moodState = selectedMood!!,
-                time = LocalDateTime.now().toString(),
+                time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")),
+                day = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM")),
                 activities = getCheckedActivities(),
                 text = binding.txtInput.toString()
             )
@@ -75,6 +78,7 @@ class CreateEntry : Fragment() {
             Toast.makeText(context, "Entry is saved", Toast.LENGTH_LONG).show()
 
             findNavController().navigate(R.id.action_createEntry_to_entryList)
+
         } else {
             Toast.makeText(context, "Please select your current mood", Toast.LENGTH_LONG).show()
         }
@@ -107,7 +111,6 @@ class CreateEntry : Fragment() {
         val list = activities_list
             .filter { activitiesCheck -> activitiesCheck.checked }
             .map { activitiesCheck -> activitiesCheck.name }
-        Log.i("ListCheck", list.toString())
         return list
     }
 

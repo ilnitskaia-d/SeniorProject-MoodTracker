@@ -5,25 +5,23 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.senproject.databinding.EntryListActivityItemBinding
 
-class EntryListActivitiesAdapter (val list: List<String>):
+class EntryListActivitiesAdapter(private var list: List<String>):
     RecyclerView.Adapter<EntryListActivitiesAdapter.ViewHolder>() {
 
-    class ViewHolder(private val binding: EntryListActivityItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bindItem(item: String) {
-            binding.tvName.text = item
-        }
+    class ViewHolder(private var binding: EntryListActivityItemBinding):
+        RecyclerView.ViewHolder(binding.root) {
+            val textView = binding.tvName
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(EntryListActivityItemBinding.inflate(LayoutInflater.from(parent.context)))
     }
 
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.textView.text = list[position]
+    }
+
     override fun getItemCount(): Int {
         return list.size
     }
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(list[position])
-    }
-
 }

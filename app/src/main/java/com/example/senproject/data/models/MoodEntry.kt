@@ -16,6 +16,7 @@ data class MoodEntry(
     val id: Int,
     val moodState: MoodState,
     val time: String,
+    val day: String,
     val activities: List<String>,
     val text: String? = null,
 ): Parcelable

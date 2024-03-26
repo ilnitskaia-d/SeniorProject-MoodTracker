@@ -20,7 +20,7 @@ interface MoodEntryDao {
     @Delete
     suspend fun deleteMoodEntry(moodEntry: MoodEntry)
 
-    @Query("SELECT * FROM moodEntry_table ORDER BY id DESC") //ToDo: order by data
+    @Query("SELECT * FROM moodEntry_table ORDER BY time")
     fun getAllMoodEntries(): LiveData<List<MoodEntry>>
 
 }

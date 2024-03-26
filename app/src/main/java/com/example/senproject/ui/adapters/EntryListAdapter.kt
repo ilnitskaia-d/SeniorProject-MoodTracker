@@ -33,9 +33,9 @@ class EntryListAdapter: RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
                 Log.i("Activities", moodEntry.activities.toString())
 
                 val adapter = EntryListActivitiesAdapter(moodEntry.activities)
+
                 rvActivities.adapter = adapter
 
-                //toDo fun for setting the activities and emotions
             }
         }
     }

@@ -30,7 +30,6 @@ class ActivitiesEntryAdapter (private val list: List<ActivitiesCheck>):
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val item = list[position]
-        holder.bindItem(item)
+        holder.bindItem(list[position])
     }
 }
