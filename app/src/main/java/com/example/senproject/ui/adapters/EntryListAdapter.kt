@@ -17,6 +17,10 @@ class EntryListAdapter: RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
         RecyclerView.ViewHolder(entryItemBinding.root) {
 
         fun bindItem(moodEntry: MoodEntry) {
+            itemView.setOnClickListener {
+                //ToDo: The whole entry
+            }
+
             entryItemBinding.apply {
                 moodEntry.apply {
                     when (moodState) {
@@ -29,13 +33,6 @@ class EntryListAdapter: RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
                 }
 
                 tvTime.text = moodEntry.time
-
-                Log.i("Activities", moodEntry.activities.toString())
-
-                val adapter = EntryListActivitiesAdapter(moodEntry.activities)
-
-                rvActivities.adapter = adapter
-
             }
         }
     }
