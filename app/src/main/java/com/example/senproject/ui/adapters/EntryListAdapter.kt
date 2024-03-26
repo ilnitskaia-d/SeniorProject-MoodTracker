@@ -1,6 +1,5 @@
 package com.example.senproject.ui.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,18 +8,17 @@ import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.data.MoodState
 import com.example.senproject.databinding.EntryItemBinding
 
-class EntryListAdapter: RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
+class EntryListAdapter(private val onClick:() -> Unit): RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
 {
     var list: List<MoodEntry> = emptyList<MoodEntry>()
 
-    class ViewHolder(private val entryItemBinding: EntryItemBinding):
+    class ViewHolder(private val entryItemBinding: EntryItemBinding, private val onClick:() -> Unit):
         RecyclerView.ViewHolder(entryItemBinding.root) {
 
         fun bindItem(moodEntry: MoodEntry) {
             itemView.setOnClickListener {
-                //ToDo: The whole entry
+                onClick()
             }
-
             entryItemBinding.apply {
                 moodEntry.apply {
                     when (moodState) {
@@ -38,7 +36,7 @@ class EntryListAdapter: RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(EntryItemBinding.inflate(LayoutInflater.from(parent.context)))
+        return ViewHolder(EntryItemBinding.inflate(LayoutInflater.from(parent.context)), onClick)
     }
 
     override fun getItemCount(): Int {

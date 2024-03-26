@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_entryList_to_createEntry"
             app:destination="@id/createEntry" />
+        <action
+            android:id="@+id/action_entryList_to_entryDescription"
+            app:destination="@id/entryDescription" />
     </fragment>
     <fragment
         android:id="@+id/createEntry"
@@ -21,6 +24,15 @@
         tools:layout="@layout/create_entry" >
         <action
             android:id="@+id/action_createEntry_to_entryList"
+            app:destination="@id/entryList" />
+    </fragment>
+    <fragment
+        android:id="@+id/entryDescription"
+        android:name="com.example.senproject.ui.fragments.EntryDescription"
+        android:label="fragment_entry_description"
+        tools:layout="@layout/entry_description" >
+        <action
+            android:id="@+id/action_entryDescription_to_entryList"
             app:destination="@id/entryList" />
     </fragment>
 </navigation>

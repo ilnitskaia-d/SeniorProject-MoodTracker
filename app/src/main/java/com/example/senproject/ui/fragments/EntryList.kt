@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.example.senproject.R
 import com.example.senproject.databinding.EntryListBinding
 import com.example.senproject.ui.adapters.EntryListAdapter
 import com.example.senproject.ui.viewmodels.EntryListViewModel
@@ -27,7 +29,7 @@ class EntryList : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = EntryListAdapter()
+        val adapter = EntryListAdapter { onEntryClick() }
         binding?.rvEntryList?.adapter = adapter
 
         entryListViewModel.getAllMoodEntries.observe(viewLifecycleOwner, Observer {
@@ -38,5 +40,9 @@ class EntryList : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    private fun onEntryClick() {
+        findNavController().navigate(R.id.action_entryList_to_entryDescription)
     }
 }
