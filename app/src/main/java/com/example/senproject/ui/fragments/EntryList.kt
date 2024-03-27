@@ -1,6 +1,7 @@
 package com.example.senproject.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,9 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.senproject.R
+import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.EntryListBinding
 import com.example.senproject.ui.adapters.EntryListAdapter
+import com.example.senproject.ui.fragments.EntryListDirections.ActionEntryListToEntryDescription
 import com.example.senproject.ui.viewmodels.EntryListViewModel
 
 class EntryList : Fragment() {
@@ -29,7 +31,7 @@ class EntryList : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = EntryListAdapter { onEntryClick() }
+        val adapter = EntryListAdapter(::onEntryClick)
         binding?.rvEntryList?.adapter = adapter
 
         entryListViewModel.getAllMoodEntries.observe(viewLifecycleOwner, Observer {
@@ -42,7 +44,7 @@ class EntryList : Fragment() {
         binding = null
     }
 
-    private fun onEntryClick() {
-        findNavController().navigate(R.id.action_entryList_to_entryDescription)
+    private fun onEntryClick(moodEntry: MoodEntry) {
+        findNavController().navigate(EntryListDirections.actionEntryListToEntryDescription(moodEntry))
     }
 }

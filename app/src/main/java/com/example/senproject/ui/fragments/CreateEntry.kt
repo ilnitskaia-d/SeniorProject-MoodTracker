@@ -54,13 +54,6 @@ class CreateEntry : Fragment() {
         initButtons()
 
         binding.rvActivitiesTable.adapter = activitiesCheckAdapter
-
-
-        binding.btnSave.setOnClickListener {
-            addMoodEntryToDB()
-        }
-
-        //ToDo: Implement the button for adding and deleting the activities (mb do in the settings fragment?)
     }
 
     private fun addMoodEntryToDB() {
@@ -71,13 +64,13 @@ class CreateEntry : Fragment() {
                 time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")),
                 day = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM")),
                 activities = getCheckedActivities(),
-                text = binding.txtInput.toString()
+                text = binding.txtInput.text.toString()
             )
 
             createEntryViewModel.addMoodEntry(entry)
             Toast.makeText(context, "Entry is saved", Toast.LENGTH_LONG).show()
 
-            findNavController().navigate(R.id.action_createEntry_to_entryList)
+            findNavController().navigateUp()
 
         } else {
             Toast.makeText(context, "Please select your current mood", Toast.LENGTH_LONG).show()
@@ -115,8 +108,15 @@ class CreateEntry : Fragment() {
     }
 
     private fun initButtons() {
-        binding.btnBack.setOnClickListener {
-            findNavController().navigate(R.id.action_createEntry_to_entryList)
+        binding.apply {
+            btnBack.setOnClickListener {
+                findNavController().navigateUp()
+            }
+
+            btnSave.setOnClickListener {
+                addMoodEntryToDB()
+            }
         }
+
     }
 }

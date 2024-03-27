@@ -22,17 +22,15 @@
         android:name="com.example.senproject.ui.fragments.CreateEntry"
         android:label="create_entry"
         tools:layout="@layout/create_entry" >
-        <action
-            android:id="@+id/action_createEntry_to_entryList"
-            app:destination="@id/entryList" />
     </fragment>
     <fragment
         android:id="@+id/entryDescription"
         android:name="com.example.senproject.ui.fragments.EntryDescription"
         android:label="fragment_entry_description"
         tools:layout="@layout/entry_description" >
-        <action
-            android:id="@+id/action_entryDescription_to_entryList"
-            app:destination="@id/entryList" />
+        <argument
+            android:name="arg_entry"
+            app:argType="com.example.senproject.data.models.MoodEntry"
+            app:nullable="true" />
     </fragment>
 </navigation>

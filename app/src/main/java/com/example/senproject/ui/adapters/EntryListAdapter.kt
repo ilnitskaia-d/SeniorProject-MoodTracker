@@ -7,30 +7,26 @@ import com.example.senproject.R
 import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.data.MoodState
 import com.example.senproject.databinding.EntryItemBinding
+import com.example.senproject.utils.Utilities
 
-class EntryListAdapter(private val onClick:() -> Unit): RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
+class EntryListAdapter(private val onClick:(moodEntry: MoodEntry) -> Unit): RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
 {
     var list: List<MoodEntry> = emptyList<MoodEntry>()
 
-    class ViewHolder(private val entryItemBinding: EntryItemBinding, private val onClick:() -> Unit):
+    class ViewHolder(private val entryItemBinding: EntryItemBinding, private val onClick:(moodEntry: MoodEntry) -> Unit):
         RecyclerView.ViewHolder(entryItemBinding.root) {
 
         fun bindItem(moodEntry: MoodEntry) {
+
             itemView.setOnClickListener {
-                onClick()
+                onClick(moodEntry)
             }
+
             entryItemBinding.apply {
                 moodEntry.apply {
-                    when (moodState) {
-                        MoodState.V_GOOD -> ivMood.setImageResource(R.drawable.emotion_great)
-                        MoodState.GOOD -> ivMood.setImageResource(R.drawable.emotion_good)
-                        MoodState.OK -> ivMood.setImageResource(R.drawable.emotion_ok)
-                        MoodState.BAD -> ivMood.setImageResource(R.drawable.emotion_notgood)
-                        MoodState.V_BAD -> ivMood.setImageResource(R.drawable.emotion_bad)
-                    }
+                    ivMood.setImageResource(Utilities.getMoodIcon(moodState))
+                    tvTime.text = time
                 }
-
-                tvTime.text = moodEntry.time
             }
         }
     }
