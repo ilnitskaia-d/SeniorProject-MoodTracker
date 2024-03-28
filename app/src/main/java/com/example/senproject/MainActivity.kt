@@ -1,13 +1,19 @@
 package com.example.senproject
 
+import android.app.DatePickerDialog
+import android.graphics.Paint
 import android.os.Bundle
 import android.view.View
+import android.widget.DatePicker
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import com.example.senproject.databinding.ActivityMainBinding
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -28,5 +34,9 @@ class MainActivity : AppCompatActivity() {
                 binding.botNav.visibility = View.VISIBLE
             }
         }
+
+
     }
+
+
 }

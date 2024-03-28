@@ -22,5 +22,4 @@ class CreateEntryViewModel(application: Application): AndroidViewModel(applicati
             repo.addMoodEntry(moodEntry)
         }
     }
-
 }

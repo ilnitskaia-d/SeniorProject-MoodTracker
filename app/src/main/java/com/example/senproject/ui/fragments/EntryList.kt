@@ -1,5 +1,7 @@
 package com.example.senproject.ui.fragments
 
+import android.app.DatePickerDialog
+import android.graphics.Paint
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -14,11 +16,15 @@ import com.example.senproject.databinding.EntryListBinding
 import com.example.senproject.ui.adapters.EntryListAdapter
 import com.example.senproject.ui.fragments.EntryListDirections.ActionEntryListToEntryDescription
 import com.example.senproject.ui.viewmodels.EntryListViewModel
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Locale
 
 class EntryList : Fragment() {
-    private var binding: EntryListBinding? = null
-
+    private lateinit var binding: EntryListBinding
     private lateinit var entryListViewModel: EntryListViewModel
+    private lateinit var adapter: EntryListAdapter
+    private var calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,24 +33,47 @@ class EntryList : Fragment() {
         entryListViewModel = ViewModelProvider(this).get(EntryListViewModel::class.java)
 
         binding = EntryListBinding.inflate(layoutInflater)
-        return binding!!.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val adapter = EntryListAdapter(::onEntryClick)
-        binding?.rvEntryList?.adapter = adapter
+        adapter = EntryListAdapter(::onEntryClick)
+        binding.rvEntryList.adapter = adapter
+
+        binding.tvDate.paintFlags = Paint.UNDERLINE_TEXT_FLAG
+
+        binding.tvDate.setOnClickListener {
+            showDatePicker()
+        }
 
         entryListViewModel.getAllMoodEntries.observe(viewLifecycleOwner, Observer {
             adapter.setData(it)
         })
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        binding = null
-    }
-
     private fun onEntryClick(moodEntry: MoodEntry) {
         findNavController().navigate(EntryListDirections.actionEntryListToEntryDescription(moodEntry))
+    }
+
+    private fun showDatePicker() {
+        val datePickerDialog = DatePickerDialog(requireContext(), { DatePicker, year: Int, month: Int, day: Int ->
+            val selectedDate = Calendar.getInstance()
+            selectedDate.set(year, month, day)
+            val dateFormat = SimpleDateFormat("dd.MM", Locale.getDefault())
+            val formattedDate = dateFormat.format(selectedDate.time)
+
+            binding.tvDate.text = formattedDate
+
+            entryListViewModel.getMoodEntriesByDate(formattedDate)
+            val dateList = entryListViewModel.moodEntriesByDate.value
+
+            Log.i("MyDate", "Date: "+ formattedDate+ "\nList: " + dateList.toString())
+            adapter.setData(dateList)
+        },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
     }
 }

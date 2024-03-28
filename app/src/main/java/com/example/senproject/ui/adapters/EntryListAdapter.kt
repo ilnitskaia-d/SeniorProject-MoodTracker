@@ -2,6 +2,7 @@ package com.example.senproject.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.senproject.R
 import com.example.senproject.data.models.MoodEntry
@@ -43,8 +44,10 @@ class EntryListAdapter(private val onClick:(moodEntry: MoodEntry) -> Unit): Recy
         holder.bindItem(list[position])
     }
 
-    fun setData(entryList: List<MoodEntry>) {
-        this.list = entryList
-        notifyDataSetChanged()
+    fun setData(entryList: List<MoodEntry>?) {
+        if (entryList != null) {
+            this.list = entryList
+            notifyDataSetChanged()
+        }
     }
 }

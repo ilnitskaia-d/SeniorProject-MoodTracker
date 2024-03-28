@@ -23,4 +23,6 @@ interface MoodEntryDao {
     @Query("SELECT * FROM moodEntry_table ORDER BY time DESC")
     fun getAllMoodEntries(): LiveData<List<MoodEntry>>
 
+    @Query("SELECT * FROM moodEntry_table WHERE day = :dayMonth ORDER BY time DESC")
+    suspend fun getMoodEntriesByDate(dayMonth: String): List<MoodEntry>
 }

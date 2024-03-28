@@ -3,6 +3,7 @@ package com.example.senproject.ui.viewmodels
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.senproject.data.database.MoodEntryDatabase
 import com.example.senproject.data.models.MoodEntry
@@ -13,21 +14,18 @@ import kotlinx.coroutines.launch
 class EntryListViewModel(application: Application): AndroidViewModel(application) {
     private val repo: MoodEntryRepo
     val getAllMoodEntries: LiveData<List<MoodEntry>>
+    val moodEntriesByDate: MutableLiveData<List<MoodEntry>>
+
 
     init {
         repo = MoodEntryRepo(MoodEntryDatabase.getDatabase(application).moodEntryDao())
         getAllMoodEntries = repo.getAllMoodEntries
+
+        moodEntriesByDate = repo.moodEntriesByDate
     }
 
-    fun updateMoodEntry(moodEntry: MoodEntry) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.updateMoodEntry(moodEntry)
-        }
+    fun getMoodEntriesByDate(dayMonth: String) = viewModelScope.launch {
+        repo.getMoodEntriesByDate(dayMonth)
     }
 
-    fun deleteMoodEntry(moodEntry: MoodEntry) {
-        viewModelScope.launch(Dispatchers.IO) {
-            repo.deleteMoodEntry(moodEntry)
-        }
-    }
 }

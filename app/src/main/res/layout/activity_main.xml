@@ -6,14 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <fragment
         android:id="@+id/container"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:defaultNavHost="true"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/bot_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:navGraph="@navigation/nav_graph"
@@ -28,8 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/bottom_nav"
-        android:background="#673AB7"
+        android:background="@color/main_background"
         />
 
-    
 </androidx.constraintlayout.widget.ConstraintLayout>
