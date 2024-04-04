@@ -16,7 +16,6 @@ class EntryListViewModel(application: Application): AndroidViewModel(application
     val getAllMoodEntries: LiveData<List<MoodEntry>>
     val moodEntriesByDate: MutableLiveData<List<MoodEntry>>
 
-
     init {
         repo = MoodEntryRepo(MoodEntryDatabase.getDatabase(application).moodEntryDao())
         getAllMoodEntries = repo.getAllMoodEntries

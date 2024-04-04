@@ -65,15 +65,18 @@ class EntryList : Fragment() {
             binding.tvDate.text = formattedDate
 
             entryListViewModel.getMoodEntriesByDate(formattedDate)
-            val dateList = entryListViewModel.moodEntriesByDate.value
-
-            Log.i("MyDate", "Date: "+ formattedDate+ "\nList: " + dateList.toString())
-            adapter.setData(dateList)
+            subscribeToLiveData()
         },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+
+    private fun subscribeToLiveData() {
+        entryListViewModel.moodEntriesByDate.observe(viewLifecycleOwner) {
+            adapter.setData(it)
+        }
     }
 }
