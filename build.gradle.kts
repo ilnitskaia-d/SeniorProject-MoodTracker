@@ -5,3 +5,4 @@ plugins {
     kotlin("kapt") version "1.9.23"
     id ("androidx.navigation.safeargs") version "2.7.7" apply false
 }
+

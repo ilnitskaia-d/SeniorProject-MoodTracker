@@ -34,9 +34,5 @@ class MainActivity : AppCompatActivity() {
                 binding.botNav.visibility = View.VISIBLE
             }
         }
-
-
     }
-
-
 }

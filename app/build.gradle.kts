@@ -6,6 +6,7 @@ plugins {
     id("androidx.navigation.safeargs")
 }
 
+
 android {
     namespace = "com.example.senproject"
     compileSdk = 34
@@ -72,4 +73,6 @@ dependencies {
     //LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
+    //MPAndroid CHart
+    implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
 }

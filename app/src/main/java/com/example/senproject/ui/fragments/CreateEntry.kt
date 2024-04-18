@@ -16,6 +16,8 @@ import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.CreateEntryBinding
 import com.example.senproject.ui.adapters.ActivitiesEntryAdapter
 import com.example.senproject.ui.viewmodels.CreateEntryViewModel
+import com.example.senproject.utils.Utilities.getTimeNow
+import com.example.senproject.utils.Utilities.getTodayDate
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
@@ -48,11 +50,8 @@ class CreateEntry : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
         initMoodChoiceTable()
-
         initButtons()
-
         binding.rvActivitiesTable.adapter = activitiesCheckAdapter
     }
 
@@ -61,8 +60,8 @@ class CreateEntry : Fragment() {
             val entry = MoodEntry(
                 id = 0,
                 moodState = selectedMood!!,
-                time = LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm")),
-                day = LocalDate.now().format(DateTimeFormatter.ofPattern("dd.MM")),
+                time = getTimeNow(),
+                day = getTodayDate(),
                 activities = getCheckedActivities(),
                 text = binding.txtInput.text.toString()
             )

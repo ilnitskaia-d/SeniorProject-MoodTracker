@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_entryList_to_entryDescription"
             app:destination="@id/entryDescription" />
+        <action
+            android:id="@+id/action_entryList_to_statistics"
+            app:destination="@id/statistics" />
     </fragment>
     <fragment
         android:id="@+id/createEntry"
@@ -33,4 +36,9 @@
             app:argType="com.example.senproject.data.models.MoodEntry"
             app:nullable="true" />
     </fragment>
+    <fragment
+        android:id="@+id/statistics"
+        android:name="com.example.senproject.ui.fragments.Statistics"
+        android:label="statistics"
+        tools:layout="@layout/statistics" />
 </navigation>

@@ -14,6 +14,7 @@ import com.example.senproject.databinding.EntryDescriptionBinding
 import com.example.senproject.ui.adapters.EntryDescriptionActivitiesAdapter
 import com.example.senproject.utils.Utilities
 import java.io.Serializable
+import java.time.format.DateTimeFormatter
 
 class EntryDescription : Fragment() {
     private lateinit var binding: EntryDescriptionBinding
@@ -34,7 +35,7 @@ class EntryDescription : Fragment() {
 
         binding.apply {
             ivMood.setImageResource(Utilities.getMoodIcon(entry!!.moodState))
-            tvDate.text = entry.day
+            tvDate.text = entry.day.format(DateTimeFormatter.ofPattern("dd.MM"))
             tvTime.text = entry.time
             tvText.text = entry.text
             rvActivities.adapter = EntryDescriptionActivitiesAdapter(entry.activities)

@@ -2,6 +2,9 @@ package com.example.senproject.utils
 
 import com.example.senproject.R
 import com.example.senproject.data.MoodState
+import java.time.LocalDate
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
 
 object Utilities {
     fun getMoodIcon(moodState: MoodState): Int {
@@ -12,5 +15,13 @@ object Utilities {
             MoodState.BAD -> R.drawable.emotion_notgood
             MoodState.V_BAD -> R.drawable.emotion_bad
         }
+    }
+
+    fun getTodayDate(): LocalDate {
+        return LocalDate.now()
+    }
+
+    fun getTimeNow(): String {
+        return LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm"))
     }
 }
