@@ -10,14 +10,17 @@
         android:id="@+id/cb_activities"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:buttonTint="@color/main_background"
         />
 
     <TextView
         android:id="@+id/tv_activities"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="activity name"
+        android:layout_gravity="center"
+        android:text="@string/activities"
         android:textSize="20sp"
+        android:textAlignment="center"
         />
 
 </LinearLayout>

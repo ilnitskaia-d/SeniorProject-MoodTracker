@@ -26,17 +26,9 @@ class CreateEntry : Fragment() {
 
     private lateinit var binding: CreateEntryBinding
     private lateinit var activitiesCheckAdapter: ActivitiesEntryAdapter
-
-    private var activities_list: List<ActivitiesCheck> = listOf(
-        ActivitiesCheck(name = "Eat"),
-        ActivitiesCheck(name = "Sleep"),
-        ActivitiesCheck(name = "Socialization"),
-        ActivitiesCheck(name = "Study"),
-        ActivitiesCheck(name = "Workout"),
-    )
+    private lateinit var activities_list: List<ActivitiesCheck>
 
     private var selectedMood: MoodState? = null
-
     private lateinit var createEntryViewModel: CreateEntryViewModel
 
     override fun onCreateView(
@@ -70,7 +62,6 @@ class CreateEntry : Fragment() {
             Toast.makeText(context, "Entry is saved", Toast.LENGTH_LONG).show()
 
             findNavController().navigateUp()
-
         } else {
             Toast.makeText(context, "Please select your current mood", Toast.LENGTH_LONG).show()
         }
@@ -85,14 +76,14 @@ class CreateEntry : Fragment() {
 
         val btnCollection = listOf(btn_great, btn_good, btn_ok, btn_notgood, btn_bad)
 
-        val selectedColor = resources.getColor(R.color.btn_selected)
+        val selectedColor = resources.getDrawable(R.drawable.ic_selected)
         val unselectedColor = resources.getColor(R.color.btn_unselected)
 
         for ((index, button) in btnCollection.withIndex()) {
             button.setOnClickListener { view ->
                 for (btn in btnCollection) btn.setBackgroundColor(unselectedColor)
 
-                view.setBackgroundColor(selectedColor)
+                view.background = selectedColor
                 selectedMood = MoodState.values()[index]
                 Log.i("MOOD", "the mood is" + selectedMood.toString())
             }
@@ -116,6 +107,5 @@ class CreateEntry : Fragment() {
                 addMoodEntryToDB()
             }
         }
-
     }
 }

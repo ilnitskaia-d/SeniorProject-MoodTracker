@@ -3,17 +3,14 @@
     <item
         android:id="@+id/entryList"
         android:icon="@drawable/ic_settings"
-        android:iconTint="@color/white"
         android:title="" />
     <item
         android:id="@+id/createEntry"
         android:icon="@drawable/ic_add_entry"
-        android:iconTint="@color/white"
         android:title="" />
     <item
         android:id="@+id/statistics"
         android:icon="@drawable/ic_notebook"
-        android:iconTint="@color/white"
         android:title=""
         />
 </menu>

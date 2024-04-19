@@ -17,20 +17,31 @@
             android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Back"
+            android:text="@string/back"
             app:icon="@drawable/ic_arrow_back"
-            app:iconSize="30sp"
+            app:iconSize="20sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/main_background"
             />
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_margin="20dp"
+            android:outlineSpotShadowColor="@color/secondary_text"
+            android:outlineAmbientShadowColor="@color/secondary_text"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
+            >
+
+         <LinearLayout
             android:id="@+id/mood_table"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/rv_activities_table"
-            android:padding="10dp"
-            android:layout_margin="20dp"
+            android:gravity="center"
             >
 
             <ImageView
@@ -75,66 +86,100 @@
 
         </LinearLayout>
 
-        <LinearLayout
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/activities_string"
+            android:textSize="24sp"
+            android:layout_gravity="start"
+            android:layout_marginStart="20dp"
+            />
+
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:padding="10dp"
-            android:layout_margin="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="20dp"
+            android:outlineSpotShadowColor="@color/secondary_text"
+            android:outlineAmbientShadowColor="@color/secondary_text"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
             >
 
-            <TextView
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="What did you do lately?"
-                android:textSize="24sp"
-                />
+                android:orientation="vertical"
+                >
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_activities_table"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                android:layout_margin="10dp"
-                tools:listitem="@layout/activities_item"
-                />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_activities_table"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_margin="10dp"
+                    tools:listitem="@layout/activities_item"
+                    />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_add_activities"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cornerRadius="100dp"
-                android:text="+"
-                android:textSize="24sp"
-                />
+                <at.markushi.ui.CircleButton
+                    android:id="@+id/btn_add_activities"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:cb_color="@color/main_background"
+                    android:src="@drawable/ic_edit"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginBottom="10dp"
+                    />
 
-        </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="0dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="What is on your mind?"
+            android:text="@string/journal_string"
             android:textSize="20sp"
             />
 
-        <com.google.android.material.textfield.TextInputLayout
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Enter text"
-            android:layout_marginBottom="20dp"
-            android:layout_marginStart="20dp"
+            android:padding="10dp"
             android:layout_marginEnd="20dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="20dp"
+            android:outlineSpotShadowColor="@color/secondary_text"
+            android:outlineAmbientShadowColor="@color/secondary_text"
+            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
             >
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/txt_input"
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
-        </com.google.android.material.textfield.TextInputLayout>
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:hint="@string/txt_hint"
+                android:layout_margin="20dp"
+                android:gravity="center"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/txt_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.cardview.widget.CardView>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_save"
@@ -143,9 +188,9 @@
             android:layout_marginBottom="20dp"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
-            android:text="Save"
+            android:text="@string/save"
+            android:backgroundTint="@color/main_background"
             />
 
     </LinearLayout>
-
 </ScrollView>

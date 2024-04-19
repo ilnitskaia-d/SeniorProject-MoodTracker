@@ -73,6 +73,13 @@ dependencies {
     //LiveData
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version")
 
-    //MPAndroid CHart
+    //MPAndroid Chart
     implementation ("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    //Neomorphic shadows
+    implementation ("com.github.4inodev:Neomorphic-FrameLayout-Android:1.03")
+
+    //Circle button
+    implementation ("com.github.markushi:circlebutton:1.1")
+
 }
