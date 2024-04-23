@@ -9,7 +9,7 @@
         android:id="@+id/entryList"
         android:name="com.example.senproject.ui.fragments.EntryList"
         android:label="entry_list"
-        tools:layout="@layout/entry_list" >
+        tools:layout="@layout/fragment_entry_list" >
         <action
             android:id="@+id/action_entryList_to_createEntry"
             app:destination="@id/createEntry" />
@@ -24,13 +24,16 @@
         android:id="@+id/createEntry"
         android:name="com.example.senproject.ui.fragments.CreateEntry"
         android:label="create_entry"
-        tools:layout="@layout/create_entry" >
+        tools:layout="@layout/fragment_create_entry" >
+        <action
+            android:id="@+id/action_createEntry_to_editActivities"
+            app:destination="@id/editActivities" />
     </fragment>
     <fragment
         android:id="@+id/entryDescription"
         android:name="com.example.senproject.ui.fragments.EntryDescription"
         android:label="fragment_entry_description"
-        tools:layout="@layout/entry_description" >
+        tools:layout="@layout/fragment_entry_description" >
         <argument
             android:name="arg_entry"
             app:argType="com.example.senproject.data.models.MoodEntry"
@@ -40,5 +43,10 @@
         android:id="@+id/statistics"
         android:name="com.example.senproject.ui.fragments.Statistics"
         android:label="statistics"
-        tools:layout="@layout/statistics" />
+        tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/editActivities"
+        android:name="com.example.senproject.ui.fragments.EditActivities"
+        android:label="fragment_edit_activities"
+        tools:layout="@layout/fragment_edit_activities" />
 </navigation>

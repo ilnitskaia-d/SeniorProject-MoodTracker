@@ -13,7 +13,7 @@ import com.example.senproject.R
 import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.data.MoodState
 import com.example.senproject.data.models.MoodEntry
-import com.example.senproject.databinding.CreateEntryBinding
+import com.example.senproject.databinding.FragmentCreateEntryBinding
 import com.example.senproject.ui.adapters.ActivitiesEntryAdapter
 import com.example.senproject.ui.viewmodels.CreateEntryViewModel
 import com.example.senproject.utils.Utilities.getTimeNow
@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter
 
 class CreateEntry : Fragment() {
 
-    private lateinit var binding: CreateEntryBinding
+    private lateinit var binding: FragmentCreateEntryBinding
     private lateinit var activitiesCheckAdapter: ActivitiesEntryAdapter
     private lateinit var activities_list: List<ActivitiesCheck>
 
@@ -36,8 +36,11 @@ class CreateEntry : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         createEntryViewModel = ViewModelProvider(this)[CreateEntryViewModel::class.java]
-        activitiesCheckAdapter = ActivitiesEntryAdapter(activities_list)
-        binding = CreateEntryBinding.inflate(layoutInflater, container, false)
+        createEntryViewModel.getAllActivities.observe(viewLifecycleOwner) {
+            activitiesCheckAdapter = ActivitiesEntryAdapter(it)
+        }
+
+        binding = FragmentCreateEntryBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -105,6 +108,10 @@ class CreateEntry : Fragment() {
 
             btnSave.setOnClickListener {
                 addMoodEntryToDB()
+            }
+
+            btnAddActivities.setOnClickListener {
+
             }
         }
     }

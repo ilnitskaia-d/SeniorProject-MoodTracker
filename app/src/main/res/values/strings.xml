@@ -11,4 +11,8 @@
     <string name="save">Save</string>
     <string name="date">Date</string>
     <string name="time">time</string>
+    <string name="edit_activities_list">Edit Activities List</string>
+    <string name="nameActivities">Name:</string>
+    <string name="icon_activities_choice">Icon:</string>
+    <string name="add_new_activity">Add new activity</string>
 </resources>

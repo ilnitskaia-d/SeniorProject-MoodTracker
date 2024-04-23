@@ -12,7 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.senproject.data.models.MoodEntry
-import com.example.senproject.databinding.EntryListBinding
+import com.example.senproject.databinding.FragmentEntryListBinding
 import com.example.senproject.ui.adapters.EntryListAdapter
 import com.example.senproject.ui.fragments.EntryListDirections.ActionEntryListToEntryDescription
 import com.example.senproject.ui.viewmodels.EntryListViewModel
@@ -21,7 +21,7 @@ import java.util.Calendar
 import java.util.Locale
 
 class EntryList : Fragment() {
-    private lateinit var binding: EntryListBinding
+    private lateinit var binding: FragmentEntryListBinding
     private lateinit var entryListViewModel: EntryListViewModel
     private lateinit var adapter: EntryListAdapter
     private var calendar = Calendar.getInstance()
@@ -32,7 +32,7 @@ class EntryList : Fragment() {
     ): View {
         entryListViewModel = ViewModelProvider(this).get(EntryListViewModel::class.java)
 
-        binding = EntryListBinding.inflate(layoutInflater)
+        binding = FragmentEntryListBinding.inflate(layoutInflater)
         return binding.root
     }
 
