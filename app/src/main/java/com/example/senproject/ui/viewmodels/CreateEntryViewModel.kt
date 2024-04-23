@@ -13,15 +13,23 @@ import com.example.senproject.logic.repos.MoodEntryRepo
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CreateEntryViewModel(application: Application): AndroidViewModel(application) {
+class CreateEntryViewModel(application: Application)
+    : AndroidViewModel(application) {
     private val repoMoodEntry: MoodEntryRepo
     private val repoActivities: ActivitiesRepo
     val getAllActivities: LiveData<List<ActivitiesCheck>>
 
 
     init {
-        repoMoodEntry = MoodEntryRepo(MoodEntryDatabase.getDatabase(application).moodEntryDao())
-        repoActivities = ActivitiesRepo(ActivitiesDatabase.getDatabase(application).ActivitiesDao())
+        repoMoodEntry = MoodEntryRepo(
+            MoodEntryDatabase
+                .getDatabase(application)
+                .moodEntryDao())
+
+        repoActivities = ActivitiesRepo(
+            ActivitiesDatabase
+                .getDatabase(application)
+                .ActivitiesDao())
 
         getAllActivities = repoActivities.getAllActivities
     }

@@ -14,18 +14,15 @@ import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.data.MoodState
 import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.FragmentCreateEntryBinding
-import com.example.senproject.ui.adapters.ActivitiesEntryAdapter
+import com.example.senproject.ui.adapters.ActivitiesAdapter
 import com.example.senproject.ui.viewmodels.CreateEntryViewModel
 import com.example.senproject.utils.Utilities.getTimeNow
 import com.example.senproject.utils.Utilities.getTodayDate
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.DateTimeFormatter
 
 class CreateEntry : Fragment() {
 
     private lateinit var binding: FragmentCreateEntryBinding
-    private lateinit var activitiesCheckAdapter: ActivitiesEntryAdapter
+    private lateinit var activitiesCheckAdapter: ActivitiesAdapter
     private lateinit var activities_list: List<ActivitiesCheck>
 
     private var selectedMood: MoodState? = null
@@ -37,7 +34,7 @@ class CreateEntry : Fragment() {
     ): View {
         createEntryViewModel = ViewModelProvider(this)[CreateEntryViewModel::class.java]
         createEntryViewModel.getAllActivities.observe(viewLifecycleOwner) {
-            activitiesCheckAdapter = ActivitiesEntryAdapter(it)
+            activitiesCheckAdapter = ActivitiesAdapter(it, false)
         }
 
         binding = FragmentCreateEntryBinding.inflate(layoutInflater, container, false)
