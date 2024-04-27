@@ -33,7 +33,7 @@
         android:id="@+id/shade_rect"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:src="@drawable/shade_rect"
+        app:srcCompat="@drawable/shade_rect"
         android:alpha="20"
         app:layout_constraintTop_toBottomOf="@id/top_toolbar"
         android:scaleY="-1"

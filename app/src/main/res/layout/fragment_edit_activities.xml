@@ -17,6 +17,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
@@ -34,10 +35,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_margin="10dp"
+
             android:text="@string/edit_activities_list"
             android:textSize="28sp"
             android:textStyle="bold"
@@ -108,7 +111,7 @@
             <ImageView
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@drawable/ic_add_entry"
+                app:srcCompat="@drawable/ic_add_entry"
                 android:layout_gravity="center"
                 app:tint="@color/main_background"
                 />

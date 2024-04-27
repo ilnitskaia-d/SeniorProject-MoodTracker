@@ -35,6 +35,7 @@ class CreateEntry : Fragment() {
         createEntryViewModel = ViewModelProvider(this)[CreateEntryViewModel::class.java]
         createEntryViewModel.getAllActivities.observe(viewLifecycleOwner) {
             activitiesCheckAdapter = ActivitiesAdapter(it, false)
+            binding.rvActivitiesTable.adapter = activitiesCheckAdapter
         }
 
         binding = FragmentCreateEntryBinding.inflate(layoutInflater, container, false)
@@ -44,7 +45,6 @@ class CreateEntry : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initMoodChoiceTable()
         initButtons()
-        binding.rvActivitiesTable.adapter = activitiesCheckAdapter
     }
 
     private fun addMoodEntryToDB() {
@@ -108,7 +108,7 @@ class CreateEntry : Fragment() {
             }
 
             btnAddActivities.setOnClickListener {
-
+                findNavController().navigate(CreateEntryDirections.actionCreateEntryToEditActivities())
             }
         }
     }

@@ -21,7 +21,7 @@
         android:id="@+id/iv_mood"
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:src="@drawable/emotion_great"
+        app:srcCompat="@drawable/emotion_great"
         android:layout_marginBottom="15dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"

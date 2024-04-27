@@ -4,10 +4,10 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.senproject.data.models.MoodEntry
+import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.logic.dao.ActivitiesDao
 
-@Database(entities = [MoodEntry::class], version = 1, exportSchema = false)
+@Database(entities = [ActivitiesCheck::class], version = 1, exportSchema = false)
 abstract class ActivitiesDatabase: RoomDatabase() {
 
     abstract fun ActivitiesDao(): ActivitiesDao

@@ -35,7 +35,7 @@
         android:label="fragment_entry_description"
         tools:layout="@layout/fragment_entry_description" >
         <argument
-            android:name="arg_entry"
+            android:name="argEntry"
             app:argType="com.example.senproject.data.models.MoodEntry"
             app:nullable="true" />
     </fragment>

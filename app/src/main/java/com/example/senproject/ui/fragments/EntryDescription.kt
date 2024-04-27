@@ -8,23 +8,20 @@ import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.example.senproject.R
-import com.example.senproject.data.models.MoodEntry
-import com.example.senproject.databinding.EntryDescriptionBinding
+import com.example.senproject.databinding.FragmentEntryDescriptionBinding
 import com.example.senproject.ui.adapters.EntryDescriptionActivitiesAdapter
 import com.example.senproject.utils.Utilities
-import java.io.Serializable
 import java.time.format.DateTimeFormatter
 
 class EntryDescription : Fragment() {
-    private lateinit var binding: EntryDescriptionBinding
+    private lateinit var binding: FragmentEntryDescriptionBinding
     private val args: EntryDescriptionArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = EntryDescriptionBinding.inflate(layoutInflater)
+        binding = FragmentEntryDescriptionBinding.inflate(layoutInflater)
         return binding.root
     }
 

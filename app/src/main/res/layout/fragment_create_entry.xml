@@ -49,7 +49,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/emotion_great"
+                app:srcCompat="@drawable/emotion_great"
                 />
 
             <ImageView
@@ -57,7 +57,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/emotion_good"
+                app:srcCompat="@drawable/emotion_good"
                 />
 
             <ImageView
@@ -65,7 +65,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/emotion_ok"
+                app:srcCompat="@drawable/emotion_ok"
                 />
 
             <ImageView
@@ -73,7 +73,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/emotion_notgood"
+                app:srcCompat="@drawable/emotion_notgood"
                 />
 
             <ImageView
@@ -81,7 +81,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/emotion_bad"
+                app:srcCompat="@drawable/emotion_bad"
                 />
 
         </LinearLayout>

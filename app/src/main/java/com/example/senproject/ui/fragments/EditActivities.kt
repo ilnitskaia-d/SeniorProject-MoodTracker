@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.databinding.FragmentEditActivitiesBinding
 import com.example.senproject.ui.adapters.ActivitiesAdapter
@@ -26,6 +27,7 @@ class EditActivities : Fragment() {
         viewModel = ViewModelProvider(this)[EditActivitiesViewModel::class.java]
         viewModel.getAllActivities.observe(viewLifecycleOwner) {
             adapter = ActivitiesAdapter(it, true, this::onDeleteClick, this::onClick)
+            binding.rvActivities.adapter = adapter
         }
 
         binding = FragmentEditActivitiesBinding.inflate(layoutInflater, container, false)
@@ -34,34 +36,52 @@ class EditActivities : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.cvAddEdit.visibility = View.GONE
-        binding.btnCancel.setOnClickListener { onClickConfirm() }
+        initButtons()
+    }
+
+    private fun initButtons() {
+        binding.btnBack.setOnClickListener { findNavController().navigateUp() }
+        binding.cvAddButton.setOnClickListener { onClickAdd() }
+        binding.btnConfirm.setOnClickListener { onClickConfirm() }
         binding.btnCancel.setOnClickListener { onClickCancel() }
     }
 
+    private fun onClickAdd() {
+        binding.cvAddEdit.visibility = View.VISIBLE
+        currentActivity = null
+        binding.etName.text = null
+    }
+
     private fun onClickCancel() {
-        //ToDo: Cancel
         binding.cvAddEdit.visibility = View.GONE
         currentActivity = null
-        //Reset Recycler View View?
+        binding.etName.text = null
     }
 
     private fun onClickConfirm() {
-        //ToDo: Confirm
         binding.cvAddEdit.visibility = View.GONE
         if(currentActivity == null){
-            //Add new
+            val name = binding.etName.text.toString()
+            if (name.isNotEmpty()) {
+                viewModel.addActivities(ActivitiesCheck(id = 0, name = binding.etName.text.toString()))
+            }
         } else {
-            //update old
+            val name = binding.etName.text.toString()
+            if (name.isNotEmpty()) {
+                val newActivity = ActivitiesCheck(id = currentActivity!!.id, name = name)
+                viewModel.updateActivities(newActivity)
+            }
         }
     }
 
     private fun onClick(a: ActivitiesCheck) {
         currentActivity = a
         binding.cvAddEdit.visibility = View.VISIBLE
-        binding.tvName.text = a.name
+        binding.etName.setText(a.name)
     }
 
     private fun onDeleteClick(a: ActivitiesCheck) {
+        //ToDo: ask if you want to delete this activity
         viewModel.deleteActivities(a)
     }
 }

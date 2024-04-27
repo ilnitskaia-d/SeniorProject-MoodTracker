@@ -9,13 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.senproject.R
 import com.example.senproject.data.models.MoodEntry
-import com.example.senproject.databinding.StatisticsBinding
+import com.example.senproject.databinding.FragmentStatisticsBinding
 import com.example.senproject.ui.viewmodels.StatisticsViewModel
 import com.example.senproject.utils.MoodEntryScatterGraph
 import com.example.senproject.utils.Utilities.getMoodIcon
 import com.github.mikephil.charting.charts.ScatterChart
 import com.github.mikephil.charting.data.Entry
-import com.github.mikephil.charting.data.ScatterData
 import com.github.mikephil.charting.data.ScatterDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
@@ -23,7 +22,7 @@ import kotlin.math.log
 
 
 class Statistics : Fragment() {
-    private lateinit var binding: StatisticsBinding
+    private lateinit var binding: FragmentStatisticsBinding
     private lateinit var statisticsViewModel: StatisticsViewModel
     private lateinit var scatterGraph: MoodEntryScatterGraph
     private lateinit var scatterChart: ScatterChart
@@ -35,7 +34,7 @@ class Statistics : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         statisticsViewModel = ViewModelProvider(this)[StatisticsViewModel::class.java]
-        binding = StatisticsBinding.inflate(layoutInflater)
+        binding = FragmentStatisticsBinding.inflate(layoutInflater)
         scatterGraph = MoodEntryScatterGraph()
         return binding.root
     }

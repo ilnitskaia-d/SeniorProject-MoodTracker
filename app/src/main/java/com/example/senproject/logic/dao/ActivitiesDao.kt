@@ -8,7 +8,6 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.senproject.data.models.ActivitiesCheck
-import com.example.senproject.data.models.MoodEntry
 
 @Dao
 interface ActivitiesDao {

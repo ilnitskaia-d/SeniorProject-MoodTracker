@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/tv_time"
-        android:src="@drawable/emotion_good"
+        app:srcCompat="@drawable/emotion_good"
         android:layout_marginBottom="5dp"
         />
 

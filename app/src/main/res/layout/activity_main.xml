@@ -23,7 +23,7 @@
         android:id="@+id/shade_rect"
         android:layout_width="match_parent"
         android:layout_height="15dp"
-        android:src="@drawable/shade_rect"
+        app:srcCompat="@drawable/shade_rect"
         android:layout_marginBottom="0.5dp"
         app:layout_constraintBottom_toTopOf="@id/bot_nav"
         />

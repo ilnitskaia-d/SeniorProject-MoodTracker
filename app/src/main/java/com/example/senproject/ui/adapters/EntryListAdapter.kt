@@ -10,9 +10,10 @@ import com.example.senproject.data.MoodState
 import com.example.senproject.databinding.EntryItemBinding
 import com.example.senproject.utils.Utilities
 
-class EntryListAdapter(private val onClick:(moodEntry: MoodEntry) -> Unit): RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
+class EntryListAdapter(private val onClick:(moodEntry: MoodEntry) -> Unit)
+    : RecyclerView.Adapter<EntryListAdapter.ViewHolder>()
 {
-    var list: List<MoodEntry> = emptyList<MoodEntry>()
+    var list: List<MoodEntry> = emptyList()
 
     class ViewHolder(private val entryItemBinding: EntryItemBinding, private val onClick:(moodEntry: MoodEntry) -> Unit):
         RecyclerView.ViewHolder(entryItemBinding.root) {
