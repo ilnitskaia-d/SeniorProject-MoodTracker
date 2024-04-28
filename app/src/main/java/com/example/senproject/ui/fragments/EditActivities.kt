@@ -1,5 +1,7 @@
 package com.example.senproject.ui.fragments
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -81,7 +83,16 @@ class EditActivities : Fragment() {
     }
 
     private fun onDeleteClick(a: ActivitiesCheck) {
-        //ToDo: ask if you want to delete this activity
-        viewModel.deleteActivities(a)
+        val iDialogue = DialogInterface.OnClickListener { dialogInterface, i ->
+            when (i) {
+                DialogInterface.BUTTON_POSITIVE -> viewModel.deleteActivities(a)
+            }
+        }
+        val bDialog = AlertDialog.Builder(context)
+        bDialog
+            .setMessage("Are you sure you want to delete the activity:\n" + a.name)
+            .setPositiveButton("Yes", iDialogue)
+            .setNegativeButton("No", iDialogue)
+            .show()
     }
 }
