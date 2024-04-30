@@ -47,6 +47,6 @@
     <fragment
         android:id="@+id/editActivities"
         android:name="com.example.senproject.ui.fragments.EditActivities"
-        android:label="fragment_edit_activities"
+        android:label="edit_activities"
         tools:layout="@layout/fragment_edit_activities" />
 </navigation>

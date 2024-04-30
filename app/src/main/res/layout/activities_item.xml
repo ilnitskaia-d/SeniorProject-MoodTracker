@@ -19,7 +19,7 @@
         android:buttonTint="@color/main_background"
         />
 
-    <ImageView
+    <TextView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,8 +30,8 @@
         app:layout_constraintEnd_toStartOf="@id/tv_activities"
         app:layout_constraintStart_toEndOf="@id/cb_activities"
 
-        app:srcCompat="@drawable/ic_edit"
-        app:tint="@color/black"
+        android:text=":D"
+        android:textSize="24sp"
         />
 
     <TextView

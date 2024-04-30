@@ -38,6 +38,7 @@ class EditActivities : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.cvAddEdit.visibility = View.GONE
+        binding.cvEmoji.visibility = View.GONE
         initButtons()
     }
 
@@ -46,6 +47,20 @@ class EditActivities : Fragment() {
         binding.cvAddButton.setOnClickListener { onClickAdd() }
         binding.btnConfirm.setOnClickListener { onClickConfirm() }
         binding.btnCancel.setOnClickListener { onClickCancel() }
+        binding.ivIcon.setOnClickListener {
+            if (binding.cvEmoji.visibility == View.GONE) {
+                binding.cvEmoji.visibility = View.VISIBLE
+                binding.cvActivitiesList.visibility = View.GONE
+                binding.cvAddButton.visibility = View.GONE
+            } else {
+                binding.cvEmoji.visibility = View.GONE
+                binding.cvActivitiesList.visibility = View.VISIBLE
+                binding.cvAddButton.visibility = View.VISIBLE
+            }
+        }
+        binding.emojiPicker.setOnEmojiPickedListener{
+            binding.ivIcon.text = it.emoji
+        }
     }
 
     private fun onClickAdd() {
@@ -55,22 +70,29 @@ class EditActivities : Fragment() {
     }
 
     private fun onClickCancel() {
+        binding.cvActivitiesList.visibility = View.VISIBLE
+        binding.cvAddButton.visibility = View.VISIBLE
         binding.cvAddEdit.visibility = View.GONE
+        binding.cvEmoji.visibility = View.GONE
         currentActivity = null
         binding.etName.text = null
     }
 
     private fun onClickConfirm() {
+        //ToDo: hide softKeyboard
+        binding.cvActivitiesList.visibility = View.VISIBLE
+        binding.cvAddButton.visibility = View.VISIBLE
         binding.cvAddEdit.visibility = View.GONE
+        binding.cvEmoji.visibility = View.GONE
         if(currentActivity == null){
             val name = binding.etName.text.toString()
             if (name.isNotEmpty()) {
-                viewModel.addActivities(ActivitiesCheck(id = 0, name = binding.etName.text.toString()))
+                viewModel.addActivities(ActivitiesCheck(id = 0, name = name, iconEmoji = binding.ivIcon.text.toString()))
             }
         } else {
             val name = binding.etName.text.toString()
             if (name.isNotEmpty()) {
-                val newActivity = ActivitiesCheck(id = currentActivity!!.id, name = name)
+                val newActivity = ActivitiesCheck(id = currentActivity!!.id, name = name, iconEmoji = binding.ivIcon.text.toString())
                 viewModel.updateActivities(newActivity)
             }
         }

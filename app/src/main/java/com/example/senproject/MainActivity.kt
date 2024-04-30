@@ -55,7 +55,8 @@ class MainActivity : AppCompatActivity() {
         setupWithNavController(binding.botNav, navController)
 
         navController.addOnDestinationChangedListener{ _: NavController, navDestination: NavDestination, _: Bundle? ->
-            if(navDestination.label == "create_entry"){
+            if(navDestination.label == "create_entry" ||
+                navDestination.label == "edit_activities"){
                 binding.botNav.visibility = View.GONE
             } else {
                 binding.botNav.visibility = View.VISIBLE

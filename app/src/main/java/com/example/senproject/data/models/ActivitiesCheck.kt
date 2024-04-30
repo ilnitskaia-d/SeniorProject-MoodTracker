@@ -12,4 +12,5 @@ data class ActivitiesCheck(
     val id: Int,
     var checked: Boolean = false,
     var name: String,
+    var iconEmoji: String = ":)"
 ): Parcelable

@@ -26,7 +26,7 @@ class ActivitiesAdapter (
 
         fun bindItem(activitiesCheck: ActivitiesCheck) {
             activitiesItemBinding.tvActivities.text = activitiesCheck.name
-
+            activitiesItemBinding.icon.text = activitiesCheck.iconEmoji
             if(editMode) {
                 activitiesItemBinding.cbActivities.visibility = View.GONE
                 activitiesItemBinding.delete.visibility = View.VISIBLE

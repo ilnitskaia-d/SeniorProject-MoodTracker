@@ -82,4 +82,6 @@ dependencies {
     //Circle button
     implementation ("com.github.markushi:circlebutton:1.1")
 
+    //Emoji picker
+    implementation ("androidx.emoji2:emoji2-emojipicker:1.4.0")
 }

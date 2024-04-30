@@ -15,6 +15,7 @@ import com.example.senproject.utils.MoodEntryScatterGraph
 import com.example.senproject.utils.Utilities.getMoodIcon
 import com.github.mikephil.charting.charts.ScatterChart
 import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.data.ScatterData
 import com.github.mikephil.charting.data.ScatterDataSet
 import com.github.mikephil.charting.highlight.Highlight
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener
@@ -69,7 +70,7 @@ class Statistics : Fragment() {
         scatterDataSet.setDrawValues(false)
 
         scatterChart = binding.scatterChart
-//        scatterChart.data = ScatterData(scatterDataSet)
+        scatterChart.data = ScatterData(scatterDataSet)
         scatterChart.notifyDataSetChanged()
         scatterChart.invalidate()
 
@@ -95,7 +96,7 @@ class Statistics : Fragment() {
                 h: Highlight?
             ) {
                 scatterChart.highlightValue(h)
-                //markerView.moodEntryLabel.text = e.data.toString()
+                markerView.moodEntryLabel.text = e.data.toString()
             }
 
             override fun onNothingSelected() {}
