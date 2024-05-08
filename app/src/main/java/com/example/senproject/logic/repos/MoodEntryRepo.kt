@@ -17,6 +17,10 @@ class MoodEntryRepo(private val moodEntryDao: MoodEntryDao) {
         moodEntryDao.addMoodEntry(moodEntry)
     }
 
+    suspend fun deleteAll() {
+        moodEntryDao.deleteAll()
+    }
+
     suspend fun updateMoodEntry(moodEntry: MoodEntry) {
         moodEntryDao.updateMoodEntry(moodEntry)
     }

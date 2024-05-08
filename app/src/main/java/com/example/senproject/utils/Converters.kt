@@ -19,21 +19,23 @@ class Converters{
             return value.joinToString { it.toString() }
         }
 
-        private var formatDate = DateTimeFormatter.ofPattern("dd.MM")
+//        private var formatDate = DateTimeFormatter.ofPattern("dd.MM")
 
         @TypeConverter
         @JvmStatic
         fun toLocalDate(value: String): LocalDate {
-            val day = value.substring(0, 2).toInt()
-            val month = value.substring(3, 5).toInt()
-            val date = LocalDate.of(0, month, day )
+            val year = value.substring(0, 4).toInt()
+            val month = value.substring(5, 7).toInt()
+            val day = value.substring(8, 10).toInt()
+            val date = LocalDate.of(year, month, day )
             return date
         }
 
         @TypeConverter
         @JvmStatic
         fun fromLocalDate(value: LocalDate): String {
-            return value.format(formatDate)
+//            return value.format(formatDate)
+            return value.toString()
         }
 
     }

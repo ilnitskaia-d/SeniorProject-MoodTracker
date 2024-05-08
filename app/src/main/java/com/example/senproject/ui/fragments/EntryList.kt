@@ -48,8 +48,8 @@ class EntryList : Fragment() {
         }
 
         entryListViewModel.getAllMoodEntries.observe(viewLifecycleOwner, Observer {
-            var list = it.sortedWith(compareBy ({ it.day }))
-            adapter.setData(list.reversed())
+            var list = it.sortedWith(compareBy ({ it.day })).reversed()
+            adapter.setData(list)
         })
     }
 
@@ -61,8 +61,7 @@ class EntryList : Fragment() {
         val datePickerDialog = DatePickerDialog(requireContext(), { DatePicker, year: Int, month: Int, day: Int ->
             val selectedDate = Calendar.getInstance()
             selectedDate.set(year, month, day)
-            val dateFormat = SimpleDateFormat("dd.MM", Locale.getDefault())
-            val formattedDate = dateFormat.format(selectedDate.time)
+            val formattedDate = selectedDate.time.toString()
 
             binding.tvDate.text = formattedDate
 

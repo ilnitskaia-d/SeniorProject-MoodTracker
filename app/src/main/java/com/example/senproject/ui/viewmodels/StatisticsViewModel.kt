@@ -14,17 +14,9 @@ import kotlinx.coroutines.launch
 class StatisticsViewModel(application: Application): AndroidViewModel(application) {
     private val repo: MoodEntryRepo
     val getAllMoodEntries: LiveData<List<MoodEntry>>
-    val moodEntriesByDate: MutableLiveData<List<MoodEntry>>
 
     init {
         repo = MoodEntryRepo(MoodEntryDatabase.getDatabase(application).moodEntryDao())
         getAllMoodEntries = repo.getAllMoodEntries
-
-        moodEntriesByDate = repo.moodEntriesByDate
     }
-
-    fun getMoodEntriesByDate(dayMonth: String) = viewModelScope.launch {
-        repo.getMoodEntriesByDate(dayMonth)
-    }
-
 }

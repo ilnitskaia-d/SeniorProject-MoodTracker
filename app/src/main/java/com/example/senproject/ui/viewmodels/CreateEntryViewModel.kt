@@ -39,4 +39,10 @@ class CreateEntryViewModel(application: Application)
             repoMoodEntry.addMoodEntry(moodEntry)
         }
     }
+
+    fun deleteAll() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repoMoodEntry.deleteAll()
+        }
+    }
 }
