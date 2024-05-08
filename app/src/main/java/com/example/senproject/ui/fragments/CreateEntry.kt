@@ -22,8 +22,8 @@ import com.example.senproject.utils.Utilities.getTodayDate
 class CreateEntry : Fragment() {
 
     private lateinit var binding: FragmentCreateEntryBinding
-    private lateinit var activitiesCheckAdapter: ActivitiesAdapter
-    private lateinit var activities_list: List<ActivitiesCheck>
+//    private lateinit var activitiesCheckAdapter: ActivitiesAdapter
+    private var activities_list: List<ActivitiesCheck>? = null
 
     private var selectedMood: MoodState? = null
     private lateinit var createEntryViewModel: CreateEntryViewModel
@@ -34,8 +34,8 @@ class CreateEntry : Fragment() {
     ): View {
         createEntryViewModel = ViewModelProvider(this)[CreateEntryViewModel::class.java]
         createEntryViewModel.getAllActivities.observe(viewLifecycleOwner) {
-            activitiesCheckAdapter = ActivitiesAdapter(it, false)
-            binding.rvActivitiesTable.adapter = activitiesCheckAdapter
+            activities_list = it
+            binding.rvActivitiesTable.adapter = ActivitiesAdapter(it, false)
         }
 
         binding = FragmentCreateEntryBinding.inflate(layoutInflater, container, false)
@@ -91,10 +91,16 @@ class CreateEntry : Fragment() {
     }
 
     private fun getCheckedActivities(): List<String> {
-        val list = activities_list
+        if (activities_list != null) {
+        val list = activities_list!!
             .filter { activitiesCheck -> activitiesCheck.checked }
             .map { activitiesCheck -> activitiesCheck.name }
-        return list
+            return list
+        }
+
+        Log.e("NoActList", "No activity list found")
+        return emptyList()
+
     }
 
     private fun initButtons() {

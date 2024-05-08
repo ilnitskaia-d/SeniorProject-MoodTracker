@@ -17,6 +17,7 @@ import com.example.senproject.ui.adapters.EntryListAdapter
 import com.example.senproject.ui.fragments.EntryListDirections.ActionEntryListToEntryDescription
 import com.example.senproject.ui.viewmodels.EntryListViewModel
 import java.text.SimpleDateFormat
+import java.time.LocalDate
 import java.util.Calendar
 import java.util.Locale
 
@@ -47,7 +48,8 @@ class EntryList : Fragment() {
         }
 
         entryListViewModel.getAllMoodEntries.observe(viewLifecycleOwner, Observer {
-            adapter.setData(it)
+            var list = it.sortedWith(compareBy ({ it.day }))
+            adapter.setData(list.reversed())
         })
     }
 
