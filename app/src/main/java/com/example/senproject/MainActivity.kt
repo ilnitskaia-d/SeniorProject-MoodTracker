@@ -60,10 +60,10 @@ class MainActivity : AppCompatActivity() {
 
             val entriesList = listOf(
                 MoodEntry(0, MoodState.OK, getTimeNow(), today, emptyList<String>(), ""),
-                MoodEntry(0, MoodState.OK, getTimeNow(), today.minusDays(1), emptyList<String>(), ""),
-                MoodEntry(0, MoodState.OK, getTimeNow(), today.minusDays(2), emptyList<String>(), ""),
-                MoodEntry(0, MoodState.OK, getTimeNow(), today.minusDays(3), emptyList<String>(), ""),
-                MoodEntry(0, MoodState.OK, getTimeNow(), today.minusDays(4), emptyList<String>(), ""),
+                MoodEntry(0, MoodState.GOOD, getTimeNow(), today.minusDays(1), emptyList<String>(), ""),
+                MoodEntry(0, MoodState.V_BAD, getTimeNow(), today.minusDays(2), emptyList<String>(), ""),
+                MoodEntry(0, MoodState.BAD, getTimeNow(), today.minusDays(3), emptyList<String>(), ""),
+                MoodEntry(0, MoodState.V_GOOD, getTimeNow(), today.minusDays(4), emptyList<String>(), ""),
                 MoodEntry(0, MoodState.OK, getTimeNow(), today.minusDays(5), emptyList<String>(), ""),
                 MoodEntry(0, MoodState.OK, getTimeNow(), today.minusDays(6), emptyList<String>(), ""),
             )

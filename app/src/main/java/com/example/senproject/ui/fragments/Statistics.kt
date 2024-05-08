@@ -62,11 +62,6 @@ class Statistics : Fragment() {
         var averageMood: Int = 0
 
         for (entry in list) {
-            if(entry.day == currentDate) {
-                count++
-                averageMood += getMoodInt(entry.moodState)
-            }
-
             if (entry.day < currentDate) {
                 val avrg = if (count == 0) 0 else averageMood / count
                 result.add(Pair(currentDate, MoodState.values()[avrg]))
@@ -75,6 +70,11 @@ class Statistics : Fragment() {
                 currentDate = entry.day
 
                 if (currentDate <= lastDay) return result
+            }
+
+            if(entry.day == currentDate) {
+                count++
+                averageMood += getMoodInt(entry.moodState)
             }
         }
 
@@ -103,8 +103,7 @@ class Statistics : Fragment() {
                 Entry(
                     x,
                     scatterGraph.getY(entry.second),
-                    //ToDo: why is it so fucking big?!
-                    resources.getDrawable(R.drawable.ic_face),
+                    resources.getDrawable(getMoodIcon(entry.second)),
                     ""
                 )
             )
