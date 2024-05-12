@@ -45,6 +45,7 @@ class Chat : Fragment() {
                 val question = binding.etMessage.text.toString()
 
                 adapter.insertMessage(Message(question, SEND_ID))
+                binding.etMessage.text = null
                 getResponse(question) {response ->
                     requireActivity().runOnUiThread{
                         adapter.insertMessage(Message(response, RECEIVE_ID))
@@ -57,14 +58,14 @@ class Chat : Fragment() {
     }
 
      private fun getResponse(question: String, callback: (String) -> Unit) {
-         val apiKey = "sk-proj-AsuXFLMbFWkzV3IjjSL0T3BlbkFJi6pWLpZUq2w4Copx39eD"
+         val apiKey = "sk-proj-3pVYREgxPQvs8NGz9QAhT3BlbkFJPWggvB2hL0i8VnUaeVGt"
          val url = "https://api.openai.com/v1/completions"
 
          val requestBody = """
              {
              "model": "gpt-3.5-turbo-instruct",
              "prompt": "$question",
-             "max_tokens": 16,
+             "max_tokens": 10,
              "temperature": 0
              }
          """.trimIndent()
