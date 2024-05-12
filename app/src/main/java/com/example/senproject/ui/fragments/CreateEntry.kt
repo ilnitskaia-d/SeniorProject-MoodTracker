@@ -16,6 +16,7 @@ import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.FragmentCreateEntryBinding
 import com.example.senproject.ui.adapters.ActivitiesAdapter
 import com.example.senproject.ui.viewmodels.CreateEntryViewModel
+import com.example.senproject.utils.Utilities.getRandomPrompt
 import com.example.senproject.utils.Utilities.getTimeNow
 import com.example.senproject.utils.Utilities.getTodayDate
 
@@ -86,6 +87,8 @@ class CreateEntry : Fragment() {
                 view.background = selectedColor
                 selectedMood = MoodState.values()[index]
                 Log.i("MOOD", "the mood is" + selectedMood.toString())
+
+                binding.tvPrompt.text = getRandomPrompt(selectedMood!!)
             }
         }
     }
