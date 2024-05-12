@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".ui.MainActivity">
 
     <fragment
         android:id="@+id/container"
@@ -43,4 +43,16 @@
         app:labelVisibilityMode="unlabeled"
         />
 
+    <at.markushi.ui.CircleButton
+        android:id="@+id/btn_chat"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_margin="20dp"
+
+        app:layout_constraintBottom_toTopOf="@id/bot_nav"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:cb_color="@color/main_background"
+        android:src="@drawable/ic_chat"
+        />
 </androidx.constraintlayout.widget.ConstraintLayout>

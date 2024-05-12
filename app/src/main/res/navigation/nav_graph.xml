@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_entryList_to_statistics"
             app:destination="@id/statistics" />
+        <action
+            android:id="@+id/action_entryList_to_chat"
+            app:destination="@id/chat" />
     </fragment>
     <fragment
         android:id="@+id/createEntry"
@@ -49,4 +52,9 @@
         android:name="com.example.senproject.ui.fragments.EditActivities"
         android:label="edit_activities"
         tools:layout="@layout/fragment_edit_activities" />
+    <fragment
+        android:id="@+id/chat"
+        android:name="com.example.senproject.ui.fragments.Chat"
+        android:label="chat"
+        tools:layout="@layout/fragment_chat" />
 </navigation>

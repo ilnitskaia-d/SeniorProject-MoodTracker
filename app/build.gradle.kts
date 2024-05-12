@@ -84,4 +84,7 @@ dependencies {
 
     //Emoji picker
     implementation ("androidx.emoji2:emoji2-emojipicker:1.4.0")
+
+    //OkHttp
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 }

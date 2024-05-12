@@ -1,28 +1,25 @@
-package com.example.senproject
+package com.example.senproject.ui
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
+import com.example.senproject.R
 import com.example.senproject.data.MoodState
 import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.ActivityMainBinding
+import com.example.senproject.ui.fragments.EntryListDirections
 import com.example.senproject.ui.viewmodels.CreateEntryViewModel
 import com.example.senproject.ui.viewmodels.EditActivitiesViewModel
-import com.example.senproject.utils.Utilities
 import com.example.senproject.utils.Utilities.getTimeNow
 import com.example.senproject.utils.Utilities.getTodayDate
-import java.time.LocalTime
 
 
 class MainActivity : AppCompatActivity() {
@@ -74,16 +71,27 @@ class MainActivity : AppCompatActivity() {
             editor.apply()
         }
 
+
+
         navController = Navigation.findNavController(this, R.id.container)
         setupWithNavController(binding.botNav, navController)
 
+        //toDo add control on the upper bar with "back" btn
         navController.addOnDestinationChangedListener{ _: NavController, navDestination: NavDestination, _: Bundle? ->
             if(navDestination.label == "create_entry" ||
-                navDestination.label == "edit_activities"){
+                navDestination.label == "edit_activities" ||
+                navDestination.label == "edit_activities" ||
+                navDestination.label == "chat"){
                 binding.botNav.visibility = View.GONE
+                binding.btnChat.visibility = View.GONE
             } else {
                 binding.botNav.visibility = View.VISIBLE
+                binding.btnChat.visibility = View.VISIBLE
             }
+        }
+
+        binding.btnChat.setOnClickListener {
+            navController.navigate(EntryListDirections.actionEntryListToChat())
         }
     }
 }
