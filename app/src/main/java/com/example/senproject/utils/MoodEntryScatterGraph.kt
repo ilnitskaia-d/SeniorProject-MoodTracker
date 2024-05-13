@@ -15,9 +15,4 @@ class MoodEntryScatterGraph() {
             MoodState.V_GOOD -> 5f
         }
     }
-
-//    fun getX(/*last week entries*/moodEntries: List<Pair<LocalDate, MoodState>>): List<Float> {
-//        //We need the list of x position, the horizontal position,
-//        return res
-//    }
 }

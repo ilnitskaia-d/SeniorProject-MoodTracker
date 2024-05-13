@@ -54,7 +54,7 @@ class Statistics : Fragment() {
         }
     }
 
-    private fun getLastWeekEntries(list: List<MoodEntry>) : List<Pair<LocalDate, MoodState>> {
+    fun getLastWeekEntries(list: List<MoodEntry>): List<Pair<LocalDate, MoodState>> {
         var result: MutableList<Pair<LocalDate, MoodState>> = mutableListOf()
 
         val today = Utilities.getTodayDate()
@@ -75,7 +75,7 @@ class Statistics : Fragment() {
                 if (currentDate <= lastDay) return result
             }
 
-            if(entry.day == currentDate) {
+            if (entry.day == currentDate) {
                 count++
                 averageMood += getMoodInt(entry.moodState)
             }
@@ -84,18 +84,9 @@ class Statistics : Fragment() {
         return result
     }
 
-    private fun getMoodInt(moodState: MoodState): Int {
-        return when (moodState){
-            MoodState.V_GOOD -> 0
-            MoodState.GOOD -> 1
-            MoodState.OK -> 2
-            MoodState.BAD -> 3
-            MoodState.V_BAD -> 4
-        }
-    }
 
     private fun plotScatterGraph() {
-        moodEntries = moodEntries!!.sortedWith(compareBy ({ it.day })).reversed()
+        moodEntries = moodEntries!!.sortedWith(compareBy({ it.day })).reversed()
         val lastWeekEntries = getLastWeekEntries(moodEntries!!)
 
         val dataSet = ArrayList<Entry>()
@@ -110,7 +101,7 @@ class Statistics : Fragment() {
                     ""
                 )
             )
-            x += 5
+            x += 1
         }
 
         val scatterDataSet = ScatterDataSet(dataSet, "")
@@ -149,5 +140,46 @@ class Statistics : Fragment() {
             override fun onNothingSelected() {}
         })
 
+    }
+
+    companion object {
+        fun getLastWeekEntries(list: List<MoodEntry>): List<Pair<LocalDate, MoodState>> {
+            var result: MutableList<Pair<LocalDate, MoodState>> = mutableListOf()
+
+            val today = Utilities.getTodayDate()
+            val lastDay = today.minusDays(7)
+
+            var currentDate = today
+            var count: Int = 0
+            var averageMood: Int = 0
+
+            for (entry in list) {
+                if (entry.day < currentDate) {
+                    val avrg = if (count == 0) 0 else averageMood / count
+                    result.add(Pair(currentDate, MoodState.values()[avrg]))
+                    count = 0
+                    averageMood = 0
+                    currentDate = entry.day
+
+                    if (currentDate <= lastDay) return result
+                }
+
+                if (entry.day == currentDate) {
+                    count++
+                    averageMood += getMoodInt(entry.moodState)
+                }
+            }
+            return result
+        }
+
+        fun getMoodInt(moodState: MoodState): Int {
+            return when (moodState) {
+                MoodState.V_GOOD -> 0
+                MoodState.GOOD -> 1
+                MoodState.OK -> 2
+                MoodState.BAD -> 3
+                MoodState.V_BAD -> 4
+            }
+        }
     }
 }

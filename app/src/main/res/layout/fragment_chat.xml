@@ -7,7 +7,9 @@
     tools:context=".ui.fragments.Chat">
 
 
+
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/ll_layout_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,7 +37,7 @@
             android:layout_margin="10dp"
             android:layout_weight="1"
             android:background="@drawable/round_button"
-            android:backgroundTint="#26A69A"
+            android:backgroundTint="@color/main_background"
             android:text="Send"
             android:textColor="@android:color/white" />
 
@@ -50,5 +52,214 @@
         tools:itemCount="20"
         tools:listitem="@layout/message_item" />
 
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/stage0BadMood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#E4E4E4"
+        android:orientation="vertical">
 
+        <Button
+            android:id="@+id/btn_same"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Same"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_better"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Better"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_worse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Worse"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_noTalk"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Do not want to talk now"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+
+    <GridLayout
+        android:id="@+id/stage1BadMood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#E4E4E4"
+        android:columnCount="3"
+        >
+
+        <Button
+            android:id="@+id/btn_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Anxious"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btn_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Sad"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            />
+
+        <Button
+            android:id="@+id/btn_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Angry"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"
+            />
+
+        <Button
+            android:id="@+id/btn_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Depressed"
+            android:textColor="@android:color/white"
+            android:layout_gravity="end"
+            />
+
+        <Button
+            android:id="@+id/btn_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Stressed"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:id="@+id/btn_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Tired"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text=""
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+
+
+        <Button
+            android:id="@+id/btn_notSure"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Not sure"
+            android:layout_columnSpan="3"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="Yes"
+            android:layout_columnSpan="3"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/btn_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/round_button"
+            android:backgroundTint="@color/main_background"
+            android:text="No"
+            android:layout_columnSpan="3"
+            android:textColor="@android:color/white"
+            android:layout_gravity="center"/>
+
+
+    </GridLayout>
 </RelativeLayout>
