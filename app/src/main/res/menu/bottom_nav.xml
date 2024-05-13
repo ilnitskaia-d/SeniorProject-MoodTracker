@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/entryList"
-        android:icon="@drawable/ic_settings"
+        android:icon="@drawable/ic_list"
         android:title="" />
     <item
         android:id="@+id/createEntry"
@@ -13,4 +13,10 @@
         android:icon="@drawable/ic_notebook"
         android:title=""
         />
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_settings"
+        android:title=""
+        />
+
 </menu>

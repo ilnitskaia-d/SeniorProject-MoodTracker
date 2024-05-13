@@ -57,4 +57,9 @@
         android:name="com.example.senproject.ui.fragments.Chat"
         android:label="chat"
         tools:layout="@layout/fragment_chat" />
+    <fragment
+        android:id="@+id/settings"
+        android:name="com.example.senproject.ui.fragments.Settings"
+        android:label="settings"
+        tools:layout="@layout/fragment_settings" />
 </navigation>

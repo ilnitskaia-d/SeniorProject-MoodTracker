@@ -48,10 +48,13 @@ class Statistics : Fragment() {
             moodEntries = it
             if (moodEntries != null) {
                 plotScatterGraph()
+//                plotPieMood()
+//                plotPieActivities()
             }
         }
     }
-    fun getLastWeekEntries(list: List<MoodEntry>) : List<Pair<LocalDate, MoodState>> {
+
+    private fun getLastWeekEntries(list: List<MoodEntry>) : List<Pair<LocalDate, MoodState>> {
         var result: MutableList<Pair<LocalDate, MoodState>> = mutableListOf()
 
         val today = Utilities.getTodayDate()

@@ -1,5 +1,6 @@
 package com.example.senproject.ui.fragments
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.graphics.Paint
 import android.os.Bundle
@@ -18,6 +19,7 @@ import com.example.senproject.ui.fragments.EntryListDirections.ActionEntryListTo
 import com.example.senproject.ui.viewmodels.EntryListViewModel
 import java.text.SimpleDateFormat
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Calendar
 import java.util.Locale
 
@@ -61,11 +63,11 @@ class EntryList : Fragment() {
         val datePickerDialog = DatePickerDialog(requireContext(), { DatePicker, year: Int, month: Int, day: Int ->
             val selectedDate = Calendar.getInstance()
             selectedDate.set(year, month, day)
-            val formattedDate = selectedDate.time.toString()
+            val formattedDate = SimpleDateFormat("dd.MM.yy").format(selectedDate.time)
 
             binding.tvDate.text = formattedDate
 
-            entryListViewModel.getMoodEntriesByDate(formattedDate)
+            entryListViewModel.getMoodEntriesByDate(SimpleDateFormat("yyyy-MM-dd").format(selectedDate.time))
             subscribeToLiveData()
         },
             calendar.get(Calendar.YEAR),

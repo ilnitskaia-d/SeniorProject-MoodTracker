@@ -30,7 +30,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.ivWelcome.visibility = View.VISIBLE
         setContentView(binding.root)
+
+        binding.ivWelcome.postDelayed(
+            Runnable { kotlin.run {
+                binding.ivWelcome.visibility = View.GONE
+            } },
+            1000
+        )
 
         val pref = this.getSharedPreferences("PREFS", 0)
         val editor = pref.edit()
@@ -70,8 +78,6 @@ class MainActivity : AppCompatActivity() {
             editor.putBoolean("firstRun", false)
             editor.apply()
         }
-
-
 
         navController = Navigation.findNavController(this, R.id.container)
         setupWithNavController(binding.botNav, navController)

@@ -10,9 +10,9 @@
         android:layout_alignParentEnd="true"
         android:layout_margin="4dp"
         android:background="@drawable/send_round_box"
-        android:backgroundTint="#26A69A"
+        android:backgroundTint="@color/secondary_background"
         android:padding="14dp"
-        android:text="This is a sample message that will appear"
+        android:text="This is a sample"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
 
@@ -24,9 +24,9 @@
         android:layout_alignParentStart="true"
         android:layout_margin="4dp"
         android:background="@drawable/receive_round_box"
-        android:backgroundTint="#FF7043"
+        android:backgroundTint="@color/main_background"
         android:padding="14dp"
-        android:text="This is a sample message that will appear"
+        android:text="This is a sample message"
         android:textColor="@android:color/white"
         android:textSize="14sp" />
 

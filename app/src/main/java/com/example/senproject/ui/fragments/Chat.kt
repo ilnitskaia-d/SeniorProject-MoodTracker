@@ -38,6 +38,19 @@ class Chat : Fragment() {
         return binding.root
     }
 
+    private val badEmotions = listOf<String>(
+        "Sadness",
+        "Anger",
+        "Anxiety",
+        "Frustration",
+        "Guilt",
+        "Shame",
+        "Loneliness",
+        "Disappointment",
+        "Stress",
+        "Envy/Jealousy"
+    )
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         binding.btnSend.setOnClickListener {
@@ -91,7 +104,7 @@ class Chat : Fragment() {
 
                  }
 
-                 val jsonObject = JSONObject(body)
+                 val jsonObject = JSONObject(body!!)
                  val jsonArray: JSONArray=jsonObject.getJSONArray("choices")
                  val textRes = jsonArray.getJSONObject(0).getString("text")
                  callback(textRes)

@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
+
     <fragment
         android:id="@+id/container"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -55,4 +56,13 @@
         app:cb_color="@color/main_background"
         android:src="@drawable/ic_chat"
         />
+
+    <ImageView
+        android:id="@+id/iv_welcome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/img_welcome"
+        android:visibility="gone"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
