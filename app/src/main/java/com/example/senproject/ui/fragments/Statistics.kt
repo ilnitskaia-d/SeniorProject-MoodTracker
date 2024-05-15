@@ -14,6 +14,7 @@ import com.example.senproject.ui.viewmodels.StatisticsViewModel
 import com.example.senproject.utils.MoodEntryScatterGraph
 import com.example.senproject.utils.Utilities
 import com.example.senproject.utils.Utilities.getMoodIcon
+import com.example.senproject.utils.Utilities.getTodayDate
 import com.github.mikephil.charting.charts.ScatterChart
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.ScatterData
@@ -91,14 +92,14 @@ class Statistics : Fragment() {
 
         val dataSet = ArrayList<Entry>()
 
-        var x: Float = 1.0f
+        var x: Float = 0.0f
         for (entry in lastWeekEntries) {
             dataSet.add(
                 Entry(
                     x,
                     scatterGraph.getY(entry.second),
                     resources.getDrawable(getMoodIcon(entry.second)),
-                    ""
+                    entry.first.toString()
                 )
             )
             x += 1
@@ -114,13 +115,16 @@ class Statistics : Fragment() {
 
         scatterChart.axisRight.isEnabled = false
         scatterChart.axisLeft.isEnabled = false
-        scatterChart.xAxis.isEnabled = false
+        scatterChart.xAxis.isEnabled = true
         scatterChart.description.text = ""
         scatterChart.legend.isEnabled = false
-        scatterChart.setBackgroundColor(activity?.resources!!.getColor(R.color.main_background))
+        scatterChart.setBackgroundColor(activity?.resources!!.getColor(R.color.white))
 
-        scatterChart.setTouchEnabled(true)
-        scatterChart.setPinchZoom(true)
+        scatterChart.setTouchEnabled(false)
+        scatterChart.setPinchZoom(false)
+
+
+        scatterChart.xAxis.calculate(.0f, 7.0f)
 
         scatterChart.setNoDataText("No data to display")
 

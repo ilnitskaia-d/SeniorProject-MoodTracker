@@ -31,7 +31,7 @@
             app:layout_constraintBottom_toTopOf="@id/chart_frame"
             />
 
-        <FrameLayout
+        <RelativeLayout
             android:id="@+id/chart_frame"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -53,7 +53,7 @@
                 android:layout_marginEnd="5dp"
                 android:layout_marginBottom="10dp"
                 android:padding="9dp" />
-        </FrameLayout>
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/pieChartsLabel"

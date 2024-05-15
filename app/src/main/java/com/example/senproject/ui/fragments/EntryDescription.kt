@@ -4,18 +4,22 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.databinding.FragmentEntryDescriptionBinding
 import com.example.senproject.ui.adapters.EntryDescriptionActivitiesAdapter
+import com.example.senproject.ui.viewmodels.EditActivitiesViewModel
 import com.example.senproject.utils.Utilities
 import java.time.format.DateTimeFormatter
 
 class EntryDescription : Fragment() {
     private lateinit var binding: FragmentEntryDescriptionBinding
     private val args: EntryDescriptionArgs by navArgs()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +31,6 @@ class EntryDescription : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initButtons()
-
         val entry = args.argEntry
 
         binding.apply {
@@ -35,7 +38,17 @@ class EntryDescription : Fragment() {
             tvDate.text = entry.day.format(DateTimeFormatter.ofPattern("dd.MM"))
             tvTime.text = entry.time
             tvText.text = entry.text
-            rvActivities.adapter = EntryDescriptionActivitiesAdapter(entry.activities)
+
+//            for(a in entry.activities) {
+//                for(i in allActivities) {
+//                    if (a == i.name) {
+//                        emoji.add(i.iconEmoji)
+//                    }
+//                }
+//            }
+
+//            if((emoji.isEmpty())) rvActivities.adapter =  EntryDescriptionActivitiesAdapter(emoji)
+             rvActivities.adapter = EntryDescriptionActivitiesAdapter(entry.activities)
         }
     }
 

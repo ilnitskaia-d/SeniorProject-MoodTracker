@@ -8,14 +8,13 @@ import com.example.senproject.R
 import com.example.senproject.data.models.ActivitiesCheck
 import com.example.senproject.databinding.ActivitiesItemBinding
 
-var SelectedPosition: Int? = null
-
 class ActivitiesAdapter (
     var list: List<ActivitiesCheck>,
     private val editMode: Boolean,
     private val onDeleteClick: ((a: ActivitiesCheck) -> Unit)? = null,
     private val onClick: ((a: ActivitiesCheck) -> Unit)? = null
-    ): RecyclerView.Adapter<ActivitiesAdapter.ViewHolder>(){
+): RecyclerView.Adapter<ActivitiesAdapter.ViewHolder>(){
+    var SelectedPosition: Int? = null
 
     inner class ViewHolder(
         private val activitiesItemBinding: ActivitiesItemBinding,
