@@ -8,15 +8,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.senproject.R
 import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.FragmentEntryListBinding
 import com.example.senproject.ui.adapters.EntryListAdapter
 import com.example.senproject.ui.fragments.EntryListDirections.ActionEntryListToEntryDescription
 import com.example.senproject.ui.viewmodels.EntryListViewModel
+import com.example.senproject.utils.Utilities.getTodayDate
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
@@ -27,6 +30,7 @@ class EntryList : Fragment() {
     private lateinit var binding: FragmentEntryListBinding
     private lateinit var entryListViewModel: EntryListViewModel
     private lateinit var adapter: EntryListAdapter
+    private lateinit var today: LocalDate
     private var calendar = Calendar.getInstance()
 
     override fun onCreateView(
@@ -34,7 +38,7 @@ class EntryList : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         entryListViewModel = ViewModelProvider(this).get(EntryListViewModel::class.java)
-
+        today = getTodayDate()
         binding = FragmentEntryListBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -49,13 +53,17 @@ class EntryList : Fragment() {
             showDatePicker()
         }
 
-        entryListViewModel.getAllMoodEntries.observe(viewLifecycleOwner, Observer {
-            var list = it.sortedWith(compareBy ({ it.day })).reversed()
-            adapter.setData(list)
-        })
+        entryListViewModel.getMoodEntriesByDate(today.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")))
+        subscribeToLiveData()
+        binding.tvDate.text = "Today"
     }
 
     private fun onEntryClick(moodEntry: MoodEntry) {
+//        val f = EntryDescription()
+//        f.arguments =  bundleOf("argEntry" to moodEntry)
+//        parentFragmentManager.beginTransaction()
+//            .add(R.id.container, f, null).commit()
+
         findNavController().navigate(EntryListDirections.actionEntryListToEntryDescription(moodEntry))
     }
 
@@ -65,7 +73,8 @@ class EntryList : Fragment() {
             selectedDate.set(year, month, day)
             val formattedDate = SimpleDateFormat("dd.MM.yy").format(selectedDate.time)
 
-            binding.tvDate.text = formattedDate
+            if(formattedDate == today.format(DateTimeFormatter.ofPattern("dd.MM.yy"))) binding.tvDate.text = "Today"
+            else binding.tvDate.text = formattedDate
 
             entryListViewModel.getMoodEntriesByDate(SimpleDateFormat("yyyy-MM-dd").format(selectedDate.time))
             subscribeToLiveData()

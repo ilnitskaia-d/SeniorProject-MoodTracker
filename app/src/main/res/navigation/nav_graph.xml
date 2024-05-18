@@ -15,7 +15,8 @@
             app:destination="@id/createEntry" />
         <action
             android:id="@+id/action_entryList_to_entryDescription"
-            app:destination="@id/entryDescription" />
+            app:destination="@id/entryDescription"
+            />
         <action
             android:id="@+id/action_entryList_to_statistics"
             app:destination="@id/statistics" />
@@ -41,6 +42,9 @@
             android:name="argEntry"
             app:argType="com.example.senproject.data.models.MoodEntry"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_entryDescription_to_entryList"
+            app:destination="@id/entryList"/>
     </fragment>
     <fragment
         android:id="@+id/statistics"

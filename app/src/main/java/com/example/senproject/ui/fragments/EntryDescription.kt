@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.senproject.data.models.ActivitiesCheck
+import com.example.senproject.data.models.MoodEntry
 import com.example.senproject.databinding.FragmentEntryDescriptionBinding
 import com.example.senproject.ui.adapters.EntryDescriptionActivitiesAdapter
 import com.example.senproject.ui.viewmodels.EditActivitiesViewModel
@@ -55,7 +56,7 @@ class EntryDescription : Fragment() {
     private fun initButtons() {
         binding.apply {
             btnBack.setOnClickListener {
-                findNavController().navigateUp()
+                findNavController().navigate(EntryDescriptionDirections.actionEntryDescriptionToEntryList())
             }
         }
     }

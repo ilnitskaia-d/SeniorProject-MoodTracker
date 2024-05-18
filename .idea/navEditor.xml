@@ -101,13 +101,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="settings2">
+                  <entry key="settings">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-564" />
-                            <option name="y" value="563" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                       </LayoutPositions>
