@@ -102,6 +102,7 @@ class EditActivities : Fragment() {
         currentActivity = a
         binding.cvAddEdit.visibility = View.VISIBLE
         binding.etName.setText(a.name)
+        binding.ivIcon.text = a.iconEmoji
     }
 
     private fun onDeleteClick(a: ActivitiesCheck) {

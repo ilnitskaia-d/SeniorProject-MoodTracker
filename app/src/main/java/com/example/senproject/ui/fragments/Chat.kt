@@ -60,7 +60,7 @@ class Chat : Fragment() {
             }
 
 //            val mood = Statistics.getLastWeekEntries(listEntry).first().second
-            val mood = MoodState.BAD
+            val mood = MoodState.V_GOOD
             binding.llLayoutBar.visibility = View.GONE
 
             startChat(mood)
@@ -428,10 +428,11 @@ class Chat : Fragment() {
                 )
 
                 binding.apply {
+                    stage1BadMood.visibility = View.GONE
                     stage0BadMood.visibility = View.VISIBLE
-                    btnSame.setOnClickListener { chatResponseBadMood(1, "Same") }
-                    btnBetter.setOnClickListener { chatResponseBadMood(1, "Better") }
-                    btnWorse.setOnClickListener { chatResponseBadMood(1, "Worse") }
+                    btnSame.setOnClickListener { chatResponseGoodMood(1, "Same") }
+                    btnBetter.setOnClickListener { chatResponseGoodMood(1, "Better") }
+                    btnWorse.setOnClickListener { chatResponseGoodMood(1, "Worse") }
 
                     btnNoTalk.setOnClickListener {
                         stage0BadMood.visibility = View.GONE
@@ -454,8 +455,7 @@ class Chat : Fragment() {
                             Message(
                                 "That's wonderful! Do you want to speak about your good mood?" +
                                         " It is important to remember those days to look back to, when we are down. What do you say?",
-                                RECEIVE_ID
-                            )
+                                RECEIVE_ID)
                         )
 
                         btnSame.visibility = View.GONE

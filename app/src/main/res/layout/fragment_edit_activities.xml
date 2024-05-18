@@ -209,7 +209,6 @@
 
                 android:text=";)"
                 android:textSize="20sp"
-                android:background="@color/secondary_background"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
