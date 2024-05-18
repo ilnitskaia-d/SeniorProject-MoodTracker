@@ -52,10 +52,9 @@
 
     </LinearLayout>
 
-
     <LinearLayout
         android:visibility="gone"
-        android:id="@+id/stage0BadMood"
+        android:id="@+id/linearTableAnswers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -105,7 +104,7 @@
     </LinearLayout>
 
     <GridLayout
-        android:id="@+id/stage1BadMood"
+        android:id="@+id/gridTableAnswers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"

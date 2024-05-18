@@ -66,7 +66,7 @@ class Chat : Fragment() {
             startChat(mood)
         } else {
             binding.llLayoutBar.visibility = View.VISIBLE
-            binding.stage0BadMood.visibility = View.GONE
+            binding.linearTableAnswers.visibility = View.GONE
 
             binding.btnSend.setOnClickListener {
                 if (binding.etMessage.text.isNotEmpty()) {
@@ -141,8 +141,8 @@ class Chat : Fragment() {
         if (stage == 5) {
             //end chat
             binding.apply {
-                stage1BadMood.visibility = View.GONE
-                stage0BadMood.visibility = View.VISIBLE
+                gridTableAnswers.visibility = View.GONE
+                linearTableAnswers.visibility = View.VISIBLE
 
                 btnSame.visibility = View.GONE
                 btnBetter.visibility = View.GONE
@@ -162,8 +162,8 @@ class Chat : Fragment() {
                 adapter.insertMessage(Message("Hello! I noticed that you have been feeling down lately. How are you feeling today?", RECEIVE_ID))
 
                 binding.apply {
-                    stage1BadMood.visibility = View.GONE
-                    stage0BadMood.visibility = View.VISIBLE
+                    gridTableAnswers.visibility = View.GONE
+                    linearTableAnswers.visibility = View.VISIBLE
 
                     btnSame.setOnClickListener { chatResponseBadMood(1, "Same") }
                     btnWorse.setOnClickListener { chatResponseBadMood(1, "Worse") }
@@ -180,12 +180,12 @@ class Chat : Fragment() {
                 adapter.insertMessage(Message(answer, SEND_ID))
 
                 if(answer == "Same" || answer == "Worse") {
-                    binding.stage0BadMood.visibility = View.GONE
+                    binding.linearTableAnswers.visibility = View.GONE
                     adapter.insertMessage(Message("How can you describe your prevalent emotion right now?", RECEIVE_ID))
 
                     binding.apply {
-                        stage0BadMood.visibility = View.GONE
-                        stage1BadMood.visibility = View.VISIBLE
+                        linearTableAnswers.visibility = View.GONE
+                        gridTableAnswers.visibility = View.VISIBLE
 
                         btn7.visibility = View.GONE
                         btn8.visibility = View.GONE
@@ -212,7 +212,7 @@ class Chat : Fragment() {
                             for(btn in buttons) {
                                 it.visibility = View.GONE
                             }
-                            stage1BadMood.columnCount = 2
+                            gridTableAnswers.columnCount = 2
 
                             btnYes.visibility = View.VISIBLE
                             btnNo.visibility = View.VISIBLE
@@ -282,8 +282,8 @@ class Chat : Fragment() {
                 adapter.insertMessage(Message("I am sorry to hear that you are troubled. Do you want to see advice?", RECEIVE_ID))
 
                 binding.apply {
-                    stage1BadMood.visibility = View.GONE
-                    stage0BadMood.visibility = View.VISIBLE
+                    gridTableAnswers.visibility = View.GONE
+                    linearTableAnswers.visibility = View.VISIBLE
 
                     btnBetter.visibility = View.GONE
                     btnSame.text = "Yes"
@@ -399,25 +399,23 @@ class Chat : Fragment() {
         }
     }
 
-    private fun chatResponseGoodMood(stage: Int, answer: String) {
-        if (stage == 5) {
-            //end chat
-            binding.apply {
-                stage1BadMood.visibility = View.GONE
-                stage0BadMood.visibility = View.VISIBLE
+    private fun endChat() {
+        binding.apply {
+            gridTableAnswers.visibility = View.GONE
+            linearTableAnswers.visibility = View.VISIBLE
 
-                btnSame.visibility = View.GONE
-                btnBetter.visibility = View.GONE
-                btnWorse.visibility = View.VISIBLE
+            btnSame.visibility = View.GONE
+            btnBetter.visibility = View.GONE
+            btnWorse.visibility = View.VISIBLE
 
-                btnWorse.text = "Exit"
-                btnWorse.setOnClickListener {
-                    findNavController().navigateUp()
-                }
+            btnWorse.text = "Exit"
+            btnWorse.setOnClickListener {
+                findNavController().navigateUp()
             }
-            return Unit
         }
+    }
 
+    private fun chatResponseGoodMood(stage: Int, answer: String) {
         when (stage) {
             0 -> {
                 adapter.insertMessage(
@@ -428,27 +426,28 @@ class Chat : Fragment() {
                 )
 
                 binding.apply {
-                    stage1BadMood.visibility = View.GONE
-                    stage0BadMood.visibility = View.VISIBLE
+                    gridTableAnswers.visibility = View.GONE
+                    linearTableAnswers.visibility = View.VISIBLE
                     btnSame.setOnClickListener { chatResponseGoodMood(1, "Same") }
                     btnBetter.setOnClickListener { chatResponseGoodMood(1, "Better") }
                     btnWorse.setOnClickListener { chatResponseGoodMood(1, "Worse") }
 
                     btnNoTalk.setOnClickListener {
-                        stage0BadMood.visibility = View.GONE
+                        linearTableAnswers.visibility = View.GONE
                         adapter.insertMessage(
                             Message(
                                 "That's ok, see you next time, take care!",
                                 RECEIVE_ID
                             )
                         )
-                        chatResponseBadMood(5, "")
+                        endChat()
                     }
                 }
             }
 
             1 -> {
                 memoryEntry = MemoryEntry(id = 0)
+
                 binding.apply {
                     if (answer == "Same" || answer == "Better") {
                         adapter.insertMessage(
@@ -464,16 +463,13 @@ class Chat : Fragment() {
                         btnNoTalk.text = "No"
 
                         btnBetter.setOnClickListener {
-                            stage0BadMood.visibility = View.GONE
-                            stage1BadMood.visibility = View.VISIBLE
-
                             chatResponseGoodMood(2, "")
                         }
 
                         btnNoTalk.setOnClickListener {
                             adapter.insertMessage(Message("Ok, I am happy that you are having a good mood today. " +
                                     "Take care and have a wonderful rest of a day!", RECEIVE_ID))
-                            chatResponseBadMood(5, "")
+                            endChat()
                         }
                     } else {
                         adapter.insertMessage(Message("That's ok. Mood is always changing. Do you want to talk about your current mood," +
@@ -492,130 +488,71 @@ class Chat : Fragment() {
                 }
             }
             2 -> {
-                adapter.insertMessage(Message("", RECEIVE_ID))
+                adapter.insertMessage(Message("Ok Let's start", RECEIVE_ID))
+                adapter.insertMessage(Message("What's bring you joy in that good day", RECEIVE_ID))
 
-                binding.apply{
-                    btn1.text = "Work"
-                    btn2.text = "School"
-                    btn3.text = "Relationships"
-                    btn4.text = "Family"
-                    btn5.text = "Health"
-                    btn6.text = "Future"
-                    btn7.text = "Self-esteem"
-                    btn8.text = "Loneliness"
-                    btn9.text = "Other"
+                binding.apply {
+                    gridTableAnswers.visibility = View.GONE
+                    linearTableAnswers.visibility = View.GONE
+                    llLayoutBar.visibility = View.VISIBLE
+                    btnSend.text = "Ready"
 
-                    btn7.visibility = View.VISIBLE
-                    btn8.visibility = View.VISIBLE
-                    btn9.visibility = View.VISIBLE
-
-                    val buttons = listOf(btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9)
-
-                    for (btn in buttons) {
-                        btn.setOnClickListener {
-                            chatResponseBadMood(3, (answer + " because of "+ btn.text))
-                        }
+                    btnSend.setOnClickListener {
+                        memoryEntry.joy = etMessage.text.toString()
+                        etMessage.text = null
+                        chatResponseGoodMood(3, "")
                     }
                 }
             }
             3 -> {
-                adapter.insertMessage(Message("I am sorry to hear that you are troubled. Do you want to see advice?", RECEIVE_ID))
+                adapter.insertMessage(Message("Wonderful!", RECEIVE_ID))
+                adapter.insertMessage(Message("What's a recent success or achievement you're proud of?", RECEIVE_ID))
 
                 binding.apply {
-                    stage1BadMood.visibility = View.GONE
-                    stage0BadMood.visibility = View.VISIBLE
+                    gridTableAnswers.visibility = View.GONE
+                    linearTableAnswers.visibility = View.GONE
+                    llLayoutBar.visibility = View.VISIBLE
+                    btnSend.text = "Ready"
 
-                    btnBetter.visibility = View.GONE
-                    btnSame.text = "Yes"
-                    btnWorse.text = "No"
-
-                    btnSame.setOnClickListener {
-                        getResponse("I feel $answer, give advice") { response ->
-                            requireActivity().runOnUiThread {
-                                adapter.insertMessage(Message(response, RECEIVE_ID))
-                            }
-                        }
-
-                        btnSame.text = "Continue"
-                        btnWorse.text = "Finish"
-
-                        btnSame.setOnClickListener {
-                            chatResponseBadMood(4, "")
-                        }
-                        btnWorse.setOnClickListener {
-                            adapter.insertMessage(Message("See you later!", RECEIVE_ID))
-                            chatResponseBadMood(5, "")
-                        }
-                    }
-
-                    btnWorse.setOnClickListener {
-                        adapter.insertMessage(Message("Sure, if you change your mind you can come back when you feel so", RECEIVE_ID))
-                        chatResponseBadMood(5, "")
+                    btnSend.setOnClickListener {
+                        memoryEntry.smile = etMessage.text.toString()
+                        etMessage.text = null
+                        chatResponseGoodMood(4, "")
                     }
                 }
             }
             4 -> {
-                adapter.insertMessage(Message("Are you experiencing any suicidal thoughts?", RECEIVE_ID))
+                adapter.insertMessage(Message("Now, what made you smile today?", RECEIVE_ID))
+
                 binding.apply {
-                    btnBetter.visibility = View.VISIBLE
-                    btnBetter.text = "Sometimes"
-                    btnSame.text = "Yes"
-                    btnWorse.text = "No"
+                    gridTableAnswers.visibility = View.GONE
+                    linearTableAnswers.visibility = View.GONE
+                    llLayoutBar.visibility = View.VISIBLE
+                    btnSend.text = "Ready"
 
-                    btnBetter.setOnClickListener {
-                        adapter.insertMessage(Message("I am sorry to hear it. You are not alone in this. It is important to remember this and take care of yourself and reach out to the close ones or professionals. \n" +
-                                "Do you want to hear advices how to cope with this thoughts?", RECEIVE_ID))
-
-                        btnBetter.visibility = View.GONE
-
-                        btnSame.setOnClickListener {
-                            getResponse("I have suicidal ideation, how to cope with those") { response ->
-                                requireActivity().runOnUiThread {
-                                    adapter.insertMessage(Message(response, RECEIVE_ID))
-                                }
-                            }
-                        }
-                        btnWorse.setOnClickListener {
-                            adapter.insertMessage(Message("I'm really sorry to hear that you're feeling this way." +
-                                    " It's important to me that you know you're not alone. " +
-                                    "If you change your mind and decide you'd like to talk or need support, I'm here for you." +
-                                    " Please take care of yourself, and remember that there are people who care about you and want to help. " +
-                                    "If things feel too overwhelming, consider reaching out to a trusted friend, family member, " +
-                                    "or mental health professional.", RECEIVE_ID))
-                            chatResponseBadMood(5, "")
-                        }
-
+                    btnSend.setOnClickListener {
+                        memoryEntry.smile = etMessage.text.toString()
+                        etMessage.text = null
+                        chatResponseGoodMood(5, "")
                     }
-                    btnSame.setOnClickListener {
-                        adapter.insertMessage(Message("I am sorry to hear it. You are not alone in this. It is important to remember this and take care of yourself and reach out to the close ones or professionals. \n" +
-                                "Do you want to hear advices how to cope with this thoughts?", RECEIVE_ID))
+                }
+            }
+            5 -> {
+                adapter.insertMessage(Message("Describe everything that you are grateful for today", RECEIVE_ID))
 
-                        btnBetter.visibility = View.GONE
+                binding.apply {
+                    gridTableAnswers.visibility = View.GONE
+                    linearTableAnswers.visibility = View.GONE
+                    llLayoutBar.visibility = View.VISIBLE
+                    btnSend.text = "Ready"
 
-                        btnSame.setOnClickListener {
-                            getResponse("Sometimes, I have suicidal ideation, how to cope with those") { response ->
-                                requireActivity().runOnUiThread {
-                                    adapter.insertMessage(Message(response, RECEIVE_ID))
-                                }
-                            }
-                        }
-                        btnWorse.setOnClickListener {
-                            adapter.insertMessage(Message("I'm really sorry to hear that you're feeling this way." +
-                                    " It's important to me that you know you're not alone. " +
-                                    "If you change your mind and decide you'd like to talk or need support, I'm here for you." +
-                                    " Please take care of yourself, and remember that there are people who care about you and want to help. " +
-                                    "If things feel too overwhelming, consider reaching out to a trusted friend, family member, " +
-                                    "or mental health professional.", RECEIVE_ID))
-                            chatResponseBadMood(5, "")
-                        }
+                    btnSend.setOnClickListener {
+                        memoryEntry.gratitude = etMessage.text.toString()
+                        etMessage.text = null
+                        adapter.insertMessage(Message("Grate! I wrote everything down for you and will remind about that wonderful day later when you will feeling down", RECEIVE_ID))
+                        endChat()
 
-                    }
-                    btnWorse.setOnClickListener {
-                        adapter.insertMessage(Message("\"I'm really glad to hear that you're not experiencing those thoughts." +
-                                " It's important to know that if you or someone you know ever needs support, there are resources available." +
-                                " Organizations like the National Suicide Prevention Lifeline (1-800-273-8255) and Crisis Text Line (text HELLO to 741741) are always there to help. " +
-                                "Remember, reaching out for support is a sign of strength, and these resources are available 24/7 for anyone in need. Take care, and I'm here if you ever want to talk about anything else.\" ", RECEIVE_ID))
-                        chatResponseBadMood(5, "")
+                        //ToDo: Add to the RoomDatabase
                     }
                 }
             }

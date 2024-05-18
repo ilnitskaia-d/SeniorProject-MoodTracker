@@ -10,9 +10,10 @@ import kotlinx.android.parcel.Parcelize
 data class MemoryEntry(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
-    val joy: String? = null,
-    val smile: String? = null,
-    val achievements: String? = null,
-    val gratitude: String? = null,
-    val activities: String? = null,
-): Parcelable
+    var joy: String? = null,
+    var achievements: String? = null,
+    var smile: String? = null,
+    var gratitude: String? = null,
+): Parcelable {
+
+}
