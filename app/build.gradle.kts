@@ -87,4 +87,7 @@ dependencies {
 
     //OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+
+    //Notifications I guess...
+    implementation("androidx.core:core-ktx:1.13.1")
 }

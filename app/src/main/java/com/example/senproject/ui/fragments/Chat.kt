@@ -1,13 +1,27 @@
 package com.example.senproject.ui.fragments
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Notification
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationChannelCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.senproject.R
 import com.example.senproject.data.MoodState
 import com.example.senproject.data.models.MemoryEntry
 import com.example.senproject.data.models.Message
@@ -17,6 +31,12 @@ import com.example.senproject.ui.adapters.MessageAdapter
 import com.example.senproject.ui.viewmodels.StatisticsViewModel
 import com.example.senproject.utils.Constant.RECEIVE_ID
 import com.example.senproject.utils.Constant.SEND_ID
+import com.example.senproject.utils.NotificationReceiver
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.time.delay
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaType
@@ -28,8 +48,13 @@ import okhttp3.Response
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
+import java.time.Duration
 
 class Chat : Fragment() {
+    val MIN_EIGHT = Duration.ofSeconds(8)
+    val MIN_SEVEN = Duration.ofSeconds(7)
+    val MIN_FOUR = Duration.ofSeconds(4)
+
     private lateinit var memoryEntry: MemoryEntry
     private lateinit var binding: FragmentChatBinding
     private lateinit var adapter: MessageAdapter
@@ -47,12 +72,13 @@ class Chat : Fragment() {
     }
 
     //toDo: delete later and pass as an argument
-    val onStartRun = true
+    val onStartRun = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         //send argument of how to start the conversation
         if(onStartRun) {
+
             var listEntry = listOf<MoodEntry>()
             viewModel = ViewModelProvider(this)[StatisticsViewModel::class.java]
             viewModel.getAllMoodEntries.observe(viewLifecycleOwner) {
@@ -65,22 +91,118 @@ class Chat : Fragment() {
 
             startChat(mood)
         } else {
-            binding.llLayoutBar.visibility = View.VISIBLE
-            binding.linearTableAnswers.visibility = View.GONE
+            adapter.insertMessage(Message("Hello, what do you want to talk about?", RECEIVE_ID))
 
-            binding.btnSend.setOnClickListener {
-                if (binding.etMessage.text.isNotEmpty()) {
-                    val question = binding.etMessage.text.toString()
+            //Bad mood
+            //Panic
+            //Good mood
+            onButtonStart()
 
-                    adapter.insertMessage(Message(question, SEND_ID))
-                    binding.etMessage.text = null
-                    getResponse(question) { response ->
-                        requireActivity().runOnUiThread {
-                            adapter.insertMessage(Message(response.trim(), RECEIVE_ID))
-                        }
-                    }
-                }
+//            binding.btnSend.setOnClickListener {
+//                if (binding.etMessage.text.isNotEmpty()) {
+//                    val question = binding.etMessage.text.toString()
+//
+//                    adapter.insertMessage(Message(question, SEND_ID))
+//                    binding.etMessage.text = null
+//                    getResponse(question) { response ->
+//                        requireActivity().runOnUiThread {
+//                            adapter.insertMessage(Message(response.trim(), RECEIVE_ID))
+//                        }
+//                    }
+        }
+    }
+
+    private fun onButtonStart() {
+        binding.apply {
+            llLayoutBar.visibility = View.GONE
+            gridTableAnswers.visibility = View.GONE
+            linearTableAnswers.visibility = View.VISIBLE
+
+            btnSame.visibility = View.VISIBLE
+            btnBetter.visibility = View.VISIBLE
+            btnWorse.visibility = View.VISIBLE
+            btnNoTalk.visibility = View.VISIBLE
+
+            btnSame.text = "Panic help"
+            btnBetter.text = "Good mood"
+            btnWorse.text = "Bad mood"
+            btnNoTalk.text = "No, thank you"
+
+            btnSame.setOnClickListener { panicChat() }
+            btnBetter.setOnClickListener { chatResponseGoodMood(1, "Same1") }
+            btnWorse.setOnClickListener {
+                adapter.insertMessage(Message("I am sorry to hear that. Let's discuss your current mood.", SEND_ID))
+                chatResponseBadMood(1, "Same1")
             }
+            btnNoTalk.setOnClickListener {
+                adapter.insertMessage(Message("Ok, see you later.", SEND_ID))
+                endChat()
+            }
+        }
+    }
+
+    private fun panicChat() {
+        binding.apply {
+            linearTableAnswers.visibility = View.VISIBLE
+            btnSame.visibility = View.VISIBLE
+            btnBetter.visibility = View.GONE
+            btnWorse.visibility = View.GONE
+            btnNoTalk.visibility = View.GONE
+
+            btnSame.text = "Stop"
+
+            CoroutineScope(Dispatchers.Main).launch {
+                breathing(7)
+            }
+            //breathing
+            //notice things
+            //meditation
+
+            btnSame.visibility = View.VISIBLE
+            btnBetter.visibility = View.VISIBLE
+            btnWorse.visibility = View.VISIBLE
+            btnNoTalk.visibility = View.VISIBLE
+        }
+    }
+
+    private suspend fun breathing(mode: Int) {
+        var exercise = true
+
+        binding.btnSame.setOnClickListener {
+            exercise = false
+            onButtonStart()
+        }
+
+        var i = 2
+        while (exercise) {
+            adapter.insertMessage(Message("Breath in for 4 sec", RECEIVE_ID))
+
+            while (i < 4) {
+                delay(Duration.ofSeconds(1))
+                adapter.insertMessage(Message(i.toString(), RECEIVE_ID))
+                i++
+            }
+
+            delay(Duration.ofSeconds(1))
+            i = 2
+            adapter.insertMessage(Message("Hold for 7", RECEIVE_ID))
+            while (i < 7) {
+                delay(Duration.ofSeconds(1))
+                adapter.insertMessage(Message(i.toString(), RECEIVE_ID))
+                i++
+            }
+
+            delay(Duration.ofSeconds(1))
+            i = 2
+            adapter.insertMessage(Message("Breath out for 8 sec", RECEIVE_ID))
+            while (i < 8) {
+                delay(Duration.ofSeconds(1))
+                adapter.insertMessage(Message(i.toString(), RECEIVE_ID))
+                i++
+            }
+
+            i = 2
+            delay(Duration.ofSeconds(1))
         }
     }
 
@@ -129,9 +251,9 @@ class Chat : Fragment() {
     fun startChat(lastMood: MoodState) {
         if (lastMood == MoodState.V_BAD ||
             lastMood == MoodState.BAD) {
-            chatResponseBadMood(0, "")
+            chatResponseBadMood(0, "onStart")
         } else {
-            chatResponseGoodMood(0, "")
+            chatResponseGoodMood(0, "onStart")
         }
     }
     private fun endChat() {
@@ -153,6 +275,7 @@ class Chat : Fragment() {
     private fun chatResponseBadMood(stage: Int, answer: String) {
         when (stage) {
             0 -> {
+
                 adapter.insertMessage(Message("Hello! I noticed that you have been feeling down lately. How are you feeling today?", RECEIVE_ID))
 
                 binding.apply {
@@ -395,12 +518,8 @@ class Chat : Fragment() {
     private fun chatResponseGoodMood(stage: Int, answer: String) {
         when (stage) {
             0 -> {
-                adapter.insertMessage(
-                    Message(
-                        "Hello! I noticed that you had a good day yesterday. " +
-                                "How are you feeling today?", RECEIVE_ID
-                    )
-                )
+                adapter.insertMessage(Message("Hello! I noticed that you had a good day yesterday. " +
+                                "How are you feeling today?", RECEIVE_ID))
 
                 binding.apply {
                     gridTableAnswers.visibility = View.GONE
@@ -424,11 +543,11 @@ class Chat : Fragment() {
             }
 
             1 -> {
-                adapter.insertMessage(Message(answer, SEND_ID))
+                if(answer != "Same1") adapter.insertMessage(Message(answer, SEND_ID))
 
                 memoryEntry = MemoryEntry(id = 0)
                 binding.apply {
-                    if (answer == "Same" || answer == "Better") {
+                    if (answer == "Same" || answer == "Better" || answer == "Same1") {
                         adapter.insertMessage(
                             Message(
                                 "That's wonderful! Do you want to speak about your good mood?" +
