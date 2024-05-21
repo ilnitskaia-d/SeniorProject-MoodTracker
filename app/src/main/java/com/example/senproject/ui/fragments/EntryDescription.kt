@@ -40,15 +40,6 @@ class EntryDescription : Fragment() {
             tvTime.text = entry.time
             tvText.text = entry.text
 
-//            for(a in entry.activities) {
-//                for(i in allActivities) {
-//                    if (a == i.name) {
-//                        emoji.add(i.iconEmoji)
-//                    }
-//                }
-//            }
-
-//            if((emoji.isEmpty())) rvActivities.adapter =  EntryDescriptionActivitiesAdapter(emoji)
              rvActivities.adapter = EntryDescriptionActivitiesAdapter(entry.activities)
         }
     }

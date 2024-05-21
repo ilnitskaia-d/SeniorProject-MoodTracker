@@ -97,7 +97,7 @@ class CreateEntry : Fragment() {
         if (activities_list != null) {
         val list = activities_list!!
             .filter { activitiesCheck -> activitiesCheck.checked }
-            .map { activitiesCheck -> activitiesCheck.name }
+            .map { activitiesCheck -> activitiesCheck.iconEmoji }
             return list
         }
 

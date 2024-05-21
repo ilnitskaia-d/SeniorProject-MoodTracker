@@ -126,9 +126,7 @@ class Chat : Fragment() {
          })
     }
 
-
     fun startChat(lastMood: MoodState) {
-        //if the last state was bad
         if (lastMood == MoodState.V_BAD ||
             lastMood == MoodState.BAD) {
             chatResponseBadMood(0, "")
@@ -136,27 +134,23 @@ class Chat : Fragment() {
             chatResponseGoodMood(0, "")
         }
     }
+    private fun endChat() {
+        binding.apply {
+            gridTableAnswers.visibility = View.GONE
+            linearTableAnswers.visibility = View.VISIBLE
+
+            btnSame.visibility = View.GONE
+            btnBetter.visibility = View.GONE
+            btnWorse.visibility = View.VISIBLE
+
+            btnWorse.text = "Exit"
+            btnWorse.setOnClickListener {
+                findNavController().navigateUp()
+            }
+        }
+    }
 
     private fun chatResponseBadMood(stage: Int, answer: String) {
-        if (stage == 5) {
-            //end chat
-            binding.apply {
-                gridTableAnswers.visibility = View.GONE
-                linearTableAnswers.visibility = View.VISIBLE
-
-                btnSame.visibility = View.GONE
-                btnBetter.visibility = View.GONE
-                btnNoTalk.visibility = View.GONE
-                btnWorse.visibility = View.VISIBLE
-
-                btnWorse.text = "Exit"
-                btnWorse.setOnClickListener {
-                    findNavController().navigateUp()
-                }
-            }
-            return Unit
-        }
-
         when (stage) {
             0 -> {
                 adapter.insertMessage(Message("Hello! I noticed that you have been feeling down lately. How are you feeling today?", RECEIVE_ID))
@@ -172,14 +166,14 @@ class Chat : Fragment() {
                     btnNoTalk.setOnClickListener {
                         adapter.insertMessage(Message(btnNoTalk.text.toString(), SEND_ID))
                         adapter.insertMessage(Message("That's ok, see you next time, take care!", RECEIVE_ID))
-                        chatResponseBadMood(5, "")
+                        endChat()
                     }
                 }
             }
             1 -> {
-                adapter.insertMessage(Message(answer, SEND_ID))
+                if(answer != "Same1") adapter.insertMessage(Message(answer, SEND_ID))
 
-                if(answer == "Same" || answer == "Worse") {
+                if(answer == "Same" || answer == "Worse" || answer == "Same1" ) {
                     binding.linearTableAnswers.visibility = View.GONE
                     adapter.insertMessage(Message("How can you describe your prevalent emotion right now?", RECEIVE_ID))
 
@@ -229,7 +223,7 @@ class Chat : Fragment() {
                             btnNo.setOnClickListener {
                                 adapter.insertMessage(Message(btnNo.text.toString(), SEND_ID))
                                 adapter.insertMessage(Message("Ok, I understand. It's important to take breaks when you need them.Take care and have a wonderful rest of a day!", RECEIVE_ID))
-                                chatResponseBadMood(5, "")
+                                endChat()
                             }
                         }
                     }
@@ -305,7 +299,7 @@ class Chat : Fragment() {
                         }
                         btnWorse.setOnClickListener {
                             adapter.insertMessage(Message("See you later!", RECEIVE_ID))
-                            chatResponseBadMood(5, "")
+                            endChat()
                         }
                     }
 
@@ -313,7 +307,7 @@ class Chat : Fragment() {
                         adapter.insertMessage(Message(btnWorse.text.toString(), SEND_ID))
 
                         adapter.insertMessage(Message("Sure, if you change your mind you can come back when you feel so", RECEIVE_ID))
-                        chatResponseBadMood(5, "")
+                        endChat()
                     }
                 }
             }
@@ -350,9 +344,8 @@ class Chat : Fragment() {
                                     " Please take care of yourself, and remember that there are people who care about you and want to help. " +
                                     "If things feel too overwhelming, consider reaching out to a trusted friend, family member, " +
                                     "or mental health professional.", RECEIVE_ID))
-                            chatResponseBadMood(5, "")
+                            endChat()
                         }
-
                     }
 
                     btnSame.setOnClickListener {
@@ -381,36 +374,20 @@ class Chat : Fragment() {
                                     " Please take care of yourself, and remember that there are people who care about you and want to help. " +
                                     "If things feel too overwhelming, consider reaching out to a trusted friend, family member, " +
                                     "or mental health professional.", RECEIVE_ID))
-                            chatResponseBadMood(5, "")
+                            endChat()
                         }
 
                     }
                     btnWorse.setOnClickListener {
                         adapter.insertMessage(Message(btnWorse.text.toString(), SEND_ID))
 
-                        adapter.insertMessage(Message("\"I'm really glad to hear that you're not experiencing those thoughts." +
+                        adapter.insertMessage(Message("I'm really glad to hear that you're not experiencing those thoughts." +
                                 " It's important to know that if you or someone you know ever needs support, there are resources available." +
                                 " Organizations like the National Suicide Prevention Lifeline (1-800-273-8255) and Crisis Text Line (text HELLO to 741741) are always there to help. " +
                                 "Remember, reaching out for support is a sign of strength, and these resources are available 24/7 for anyone in need. Take care, and I'm here if you ever want to talk about anything else.\" ", RECEIVE_ID))
-                        chatResponseBadMood(5, "")
+                        endChat()
                     }
                 }
-            }
-        }
-    }
-
-    private fun endChat() {
-        binding.apply {
-            gridTableAnswers.visibility = View.GONE
-            linearTableAnswers.visibility = View.VISIBLE
-
-            btnSame.visibility = View.GONE
-            btnBetter.visibility = View.GONE
-            btnWorse.visibility = View.VISIBLE
-
-            btnWorse.text = "Exit"
-            btnWorse.setOnClickListener {
-                findNavController().navigateUp()
             }
         }
     }
@@ -434,6 +411,7 @@ class Chat : Fragment() {
 
                     btnNoTalk.setOnClickListener {
                         linearTableAnswers.visibility = View.GONE
+                        adapter.insertMessage(Message(btnNoTalk.text.toString(), SEND_ID))
                         adapter.insertMessage(
                             Message(
                                 "That's ok, see you next time, take care!",
@@ -446,8 +424,9 @@ class Chat : Fragment() {
             }
 
             1 -> {
-                memoryEntry = MemoryEntry(id = 0)
+                adapter.insertMessage(Message(answer, SEND_ID))
 
+                memoryEntry = MemoryEntry(id = 0)
                 binding.apply {
                     if (answer == "Same" || answer == "Better") {
                         adapter.insertMessage(
@@ -463,10 +442,13 @@ class Chat : Fragment() {
                         btnNoTalk.text = "No"
 
                         btnBetter.setOnClickListener {
+                            adapter.insertMessage(Message(btnBetter.text.toString(), SEND_ID))
                             chatResponseGoodMood(2, "")
                         }
 
                         btnNoTalk.setOnClickListener {
+                            adapter.insertMessage(Message(btnNoTalk.text.toString(), SEND_ID))
+
                             adapter.insertMessage(Message("Ok, I am happy that you are having a good mood today. " +
                                     "Take care and have a wonderful rest of a day!", RECEIVE_ID))
                             endChat()
@@ -481,9 +463,14 @@ class Chat : Fragment() {
                         btnNoTalk.text = "Yesterday"
 
                         //today
-                        btnBetter.setOnClickListener { chatResponseBadMood(1, "Same") }
+                        btnBetter.setOnClickListener {
+                            adapter.insertMessage(Message(btnBetter.text.toString(), SEND_ID))
+
+                            chatResponseBadMood(1, "Same1") }
                         //yesterday
-                        btnNoTalk.setOnClickListener { chatResponseGoodMood(2, "") }
+                        btnNoTalk.setOnClickListener {
+                            adapter.insertMessage(Message(btnNoTalk.text.toString(), SEND_ID))
+                            chatResponseGoodMood(2, "") }
                     }
                 }
             }
@@ -499,6 +486,7 @@ class Chat : Fragment() {
 
                     btnSend.setOnClickListener {
                         memoryEntry.joy = etMessage.text.toString()
+                        adapter.insertMessage(Message(etMessage.text.toString(), SEND_ID))
                         etMessage.text = null
                         chatResponseGoodMood(3, "")
                     }
@@ -516,6 +504,7 @@ class Chat : Fragment() {
 
                     btnSend.setOnClickListener {
                         memoryEntry.smile = etMessage.text.toString()
+                        adapter.insertMessage(Message(etMessage.text.toString(), SEND_ID))
                         etMessage.text = null
                         chatResponseGoodMood(4, "")
                     }
@@ -532,6 +521,7 @@ class Chat : Fragment() {
 
                     btnSend.setOnClickListener {
                         memoryEntry.smile = etMessage.text.toString()
+                        adapter.insertMessage(Message(etMessage.text.toString(), SEND_ID))
                         etMessage.text = null
                         chatResponseGoodMood(5, "")
                     }
@@ -548,6 +538,7 @@ class Chat : Fragment() {
 
                     btnSend.setOnClickListener {
                         memoryEntry.gratitude = etMessage.text.toString()
+                        adapter.insertMessage(Message(etMessage.text.toString(), SEND_ID))
                         etMessage.text = null
                         adapter.insertMessage(Message("Grate! I wrote everything down for you and will remind about that wonderful day later when you will feeling down", RECEIVE_ID))
                         endChat()
